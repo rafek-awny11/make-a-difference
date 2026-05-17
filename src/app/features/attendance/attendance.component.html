@@ -1,0 +1,87 @@
+<section class="bg-gray-300 p-8  min-h-screen">
+    
+         <div class="grid grid-cols-6 gap-4 items-center ">
+        <div class="order-1 col-span-6 p-1  md:col-span-1  text-center rounded-2xl colo1 ">
+            <h2 class="text-lg font-bold  sm:text-base md:text-xl  lg:text-xl  ">All Attendances</h2>
+
+        </div>
+        <div class="col-span-6 md:col-span-2 md:col-end-7 order-2 md:order-2">
+      <form class="max-w-sm mx-auto">
+        <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only"
+          >Search Attendances</label
+        >
+        <div class="relative">
+          <input
+            [(ngModel)]="text"
+            type="search"
+            name="search"
+            class="block w-full md:w-2xs ps-4 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+            placeholder="Search Meeting...."
+          />
+        </div>
+      </form>
+    </div>
+        <div class="order-3 md:order-1 col-span-6 md:col-span-5 text-center flex justify-end ">
+            <button class="btn btn1 md:w-32" [routerLink]="['/details-attendance']">
+                Create
+
+            </button>
+
+        </div>
+        <!-- table -->
+         <div class="order-2 md:order-2 col-span-6 md:col-start-1 md:col-end-7 ">
+            
+<div class="relative max-h-[500px] overflow-y-auto overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">            <table  class="w-full text-sm text-left rtl:text-right text-body">
+<thead
+        class="sticky top-0 z-10 bg-neutral-secondary-medium border-b border-default-medium shadow-md">          
+            <tr>
+              <th scope="col" class="px-6 py-3 font-medium">Event Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">Start</th>
+              <th scope="col" class="px-6 py-3 font-medium">End</th>
+          
+            </tr>
+          
+          <tbody>
+        @for (item of allattendance |search:text ;  track item.id) {
+          <tr class="border-b border-default">
+                <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+                    {{item.meeting.event.name}}
+                </th>
+                  <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+                    {{item.meeting.name}}
+                </th>
+                <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+                    {{item.meeting.event.from}}
+                </td>
+                <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+                    {{item.meeting.event.to}}
+                </td>
+               
+        
+
+            </tr>
+
+        }
+        
+      </tbody>
+
+
+          
+
+            </table>
+            </div>
+
+            </div>
+            
+
+         </div>
+
+    
+
+    
+    
+   
+
+
+</section>

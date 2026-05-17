@@ -1,0 +1,162 @@
+<section class="bg-gray-300 p-8 min-h-screen">
+    <div class="grid grid-cols-6 gap-4 items-center">
+        <div class="col-span-6 md:col-span-2 md:col-end-7 order-2 md:order-2">
+      <form class="max-w-sm mx-auto">
+        <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only"
+          >Search Student</label
+        >
+        <div class="relative">
+          <input
+            [(ngModel)]="text"
+            type="search"
+            name="search"
+            class="block w-full md:w-2xs ps-4 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+            placeholder="Search Meeting...."
+          />
+        </div>
+      </form>
+    </div>
+    <div class="order-1 col-span-6 md:col-span-1 text-center rounded-2xl colo1">
+      <h2 class="text-lg font-bold md:text-2xl">All Student</h2>
+    </div>
+    <!--search-->
+  
+
+    <div class="order-3 md:order-1 col-span-6 md:col-span-5 flex justify-end">
+      <button
+        data-modal-target="default-modal"
+        data-modal-toggle="default-modal"
+        class="btn btn1 md:w-32"
+      >
+        Create Student
+      </button>
+    </div>
+
+    <!--table-->
+    <div class="order-2 md:order-2 col-span-6 md:col-start-1 md:col-end-7">
+      <div
+        class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default"
+      >
+        <table  class="w-full text-sm text-left rtl:text-right text-body">
+          <thead
+            class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3 font-medium">Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">Phone</th>
+                 <th scope="col"  class="px-6 py-3 font-medium">Action</th>
+              <th scope="col" class="px-6 py-3 font-medium">Delete</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for ( student of studentData | search:text ; track student.id) {
+            <tr class="bg-neutral-primary-soft border-b border-default">
+              <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                {{ student.name }}
+              </th>
+              <td class="px-6 py-4 font-sans">
+                {{ student.phoneNo }}
+              </td>
+              
+
+              <td class="px-6 py-4">
+                <div [routerLink]="['/studentDetails' ,student.id ]" class="font-medium cursor-pointer text-fg-brand hover:underline">Edit</div>
+              </td>
+             <td (click)="removeStudent(student.id)" class="px-6 py-4">
+                <i class="fa-solid fa-trash hover:text-red-700 cursor-pointer"></i>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main modal -->
+  <form [formGroup]="studentForm" (ngSubmit)="submitForm()" >
+    <div
+      #modal
+      id="default-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    >
+      <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div
+          class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6"
+        >
+          <!-- Modal header -->
+          <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
+            <h3 class="text-2xl font-semibold text-heading">Creat Student</h3>
+            <button
+              type="button"
+              class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
+               (click)="closeModal()"
+            >
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
+                />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="mb-4">
+            <label for="text" class="block mb-2.5 text-sm font-medium text-heading"
+              >Name</label
+            >
+            <input
+              formControlName="name"
+              type="text"
+              id="text"
+              class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+              placeholder="name"
+              required
+            />
+          </div>
+
+          <div class="relative mb-4 max-w-sm">
+            <input
+              formControlName="phoneNo"
+              type="tel"
+              class="block w-full ps-5 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 shadow-xs placeholder:text-body"
+              placeholder="Phone Nember"
+            />
+          </div>
+
+
+          <!-- Modal footer -->
+          <div class="flex items-center border-t border-default space-x-4 pt-4 md:pt-5">
+            <button
+              [disabled]="isLoading"
+              type="submit"
+              class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+            >
+              Creat @if (isLoading) {
+              <span><i class="fas fa-spinner animate-spin"></i></span>
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  
+</section>

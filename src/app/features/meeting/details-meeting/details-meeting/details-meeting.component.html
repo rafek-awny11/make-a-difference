@@ -1,0 +1,105 @@
+<section class="bg-gray-700 p-8 min-h-screen">
+    <div class="text-2xl p-8">
+        <h1 class="text-amber-100">meeting Details</h1>
+
+    </div>
+
+    <!-- form -->
+    
+    <div class="order-3 md:order-2 col-span-6 md:col-start-1 md:col-end-7 ">
+      <div
+        class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-2xl border  border-default "
+      >
+        <table  class="w-full text-sm text-left rtl:text-right text-body">
+          <thead
+            class="text-sm text-body text-center bg-neutral-secondary-medium border-b border-default-medium rounded-2xl"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3 font-medium">Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">Event Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">time</th>
+              
+            </tr>
+          </thead>
+
+          <tbody *ngIf="meeting">
+          
+            <tr class="bg-neutral-primary-soft border-b text-center border-default">
+              <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                {{ meeting.name }}
+              </th>
+              <td class="px-6 py-4 font-sans">
+                {{ meeting.eventName }}
+              </td>
+              <td class="px-6 py-4  font-sans">
+                {{ meeting.meetingTime }}
+              </td>
+
+              <td class="px-6 py-4">
+              </td>
+             
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div *ngIf="meeting" class="flex my-6 md:justify-end justify-center l:justify-center">
+        <button      [routerLink]="['/update-meeting',meeting.id]" class="btn btn1 md:w-32 mx-4 p-2 "> UpDate</button>
+        <button [routerLink]="'/meeting'" class="btn btn1 btn2 md:w-32 mx-4 p-2 "> Back meeting</button>
+    </div>
+
+</section>
+
+
+
+<!-- <main *ngIf="update" class="bg-gray-600 m-8 max-h-screen  shadow-2xl rounded-2xl">
+    <div class="text-center">
+        <h2 class="text-2xl text-amber-100">
+            edit name
+        </h2>
+
+
+    </div>
+    <div class="order-3 md:order-2 col-span-6 md:col-start-1 md:col-end-7 ">
+      <div
+        class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-2xl border  border-default "
+      >
+        <table  class="w-full text-sm text-left rtl:text-right text-body">
+          <thead
+            class="text-sm text-body text-center bg-neutral-secondary-medium border-b border-default-medium rounded-2xl"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3 font-medium">Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">Event Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">time</th>
+              
+            </tr>
+          </thead>
+
+          <tbody *ngIf="meeting">
+          
+            <tr class="bg-neutral-primary-soft border-b text-center border-default">
+              <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                {{ meeting.name }}
+              </th>
+              <td class="px-6 py-4 font-sans">
+                {{ meeting.eventName }}
+              </td>
+              <td class="px-6 py-4  font-sans">
+                {{ meeting.meetingTime }}
+              </td>
+
+              
+             
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</main> -->

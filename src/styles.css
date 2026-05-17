@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+body{
+    margin: auto;
+    font-family: "Playfair Display", serif;
+    
+   
+}
+:root{
+  --main-color:rgb(242, 186, 96);
+  --second-color: rgb(232,7,121);
+
+}
+
+
+@utility container{
+    margin-inline:auto;
+}
+
+.colo1 {
+  background-color: var(--main-color);
+}
+@layer components{
+  .btn1{ 
+    @apply  disabled:bg-gray-500 disabled:cursor-not-allowed  rounded-2xl bg-fg-pink py-1.5 w-full cursor-pointer font-bold hover:bg-amber-400 transition-all duration-300 };
+  .btnn2{
+    @apply  disabled:bg-gray-500 disabled:cursor-not-allowed  rounded-2xl bg-amber-400 py-1.5 w-full cursor-pointer font-bold hover:bg-red-600 transition-all duration-300 };
+
+
+}
+
+
+
+
+/* @keyframes spin-once {
+  0% { transform: rotate(0deg); }
+  100%   { transform: rotate(360deg); }
+}
+
+.animate-spin-once {
+  animation: spin-once 1s linear;} */
+
+  @keyframes drop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-drop {
+  animation: drop 1s ease-out forwards;
+}
+
+
+
+
+@keyframes drop-bounce {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(20%);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-drop-bounce {
+  animation: drop-bounce 1.5s ease-out forwards;
+}
+
+

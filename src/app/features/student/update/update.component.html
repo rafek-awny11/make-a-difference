@@ -1,0 +1,30 @@
+<section class="bg-gray-600 p-8 min-h-screen">
+  <div class="bg-white shadow rounded-lg h-[500px] md:h[200px]">
+    <div class="p-4 flex-1 overflow-auto">
+      <h2 class="text-lg font-semibold mb-2 text-center">UpDate Student</h2>
+
+    </div>
+    <form [formGroup]="studentForm" (ngSubmit)="UpdateStudent()" >
+        <div class="grid gap-2 md:grid-cols-1 lg:grid-cols-2 mb-2">
+        <div>
+            <label for="first_name" class="block mb-2.5 mx-4  text-sm font-medium text-heading">Name</label>
+            <input formControlName="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-xl rounded-base focus:ring-brand focus:border-brand block w-sm px-4 py-2.5 mx-4 shadow-xs placeholder:text-body"  /> 
+        </div>
+        <div>
+            <label for="last_name" class="block mb-2.5 mx-4 text-sm font-medium text-heading">Number</label>
+            <input formControlName="phoneNo"  class="bg-neutral-secondary-medium border border-default-medium text-heading text-xl rounded-base focus:ring-brand focus:border-brand block w-sm  px-4 py-2.5  mx-4 shadow-xs placeholder:text-body"  />
+        </div>
+
+    </div>
+    <div class="flex my-6 md:justify-end justify-center l:justify-center">
+        <button  type="submit"  class="btn btn1 md:w-32 mx-4 p-2 "> UpDate Creat @if (isLoading) {
+              <span><i class="fas fa-spinner animate-spin"></i></span>
+              }</button>
+        <button [routerLink]="'/student'" class="btn btn1 md:w-32 mx-4 p-2 "> Back Home</button>
+
+
+    </div>
+
+    </form>
+  </div>
+</section>

@@ -1,0 +1,8 @@
+.student-card {
+  background-color: #0e7490; /* نفس لون cyan-700 */
+}
+.barcode-only {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+}

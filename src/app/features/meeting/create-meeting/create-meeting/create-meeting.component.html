@@ -1,0 +1,56 @@
+<section class="bg-gray-600 p-8 min-h-screen">
+  <div class="bg-white shadow rounded-lg h-[500px] md:h[200px]">
+    <div class="p-4 flex-1 overflow-auto">
+      <h2 class="text-xl font-semibold mb-2 text-center">Creat Meeting</h2>
+
+    </div>
+     <form [formGroup]="creatForm" (ngSubmit)="creatMeeting()" >
+        <div class="grid grid-cols-1 px-4 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-6 mb-4">
+          <div>
+           <label class="block mb-2.5   text-sm font-medium text-heading">Event Name</label>
+           <select formControlName="eventId"
+    class="bg-neutral-secondary-medium border border-default-medium
+               text-heading text-base sm:text-lg
+               rounded-base block w-xs
+               h-10 sm:h-12 px-3 sm:px-4">
+   
+    <option *ngFor="let event of event" [value]="event.id">
+      {{ event.name }}
+    </option>
+
+  </select>
+        </div> 
+
+
+        <div class="">
+            <label for="first_name" class="block mb-2.5    text-sm font-medium text-heading">Name</label>
+            <input formControlName="name"  class="bg-neutral-secondary-medium border border-default-medium
+               text-heading text-base sm:text-lg
+               rounded-base focus:ring-brand focus:border-brand
+               block w-xs px-3 sm:px-4 py-2 sm:py-2.5 shadow-xs"   /> 
+        </div>
+        
+        
+        
+        <div>
+            <label for="last_name" class="block mb-2.5  text-lx font-medium text-heading">meeting time</label>
+            <input formControlName="meetingTime"  type="datetime-local" class="bg-neutral-secondary-medium border border-default-medium
+               text-heading text-base sm:text-lg
+               rounded-base focus:ring-brand focus:border-brand
+               block w-xs px-2  sm:px-4 py-2 sm:py-2.5 shadow-xs"  />
+        </div>
+
+    </div>
+    <div class="flex my-6 md:justify-end justify-center l:justify-center">
+        <button  type="submit"  class="btn btn1 md:w-32 mx-4 p-2 "> Creat @if (isLoading) {
+              <span><i class="fas fa-spinner animate-spin"></i></span>
+              }</button>
+        <button [routerLink]="'/meeting'" class="btn btn1 md:w-32 mx-4 p-2 "> Back List</button>
+
+
+    </div>
+
+    </form>
+   
+  </div>
+</section>

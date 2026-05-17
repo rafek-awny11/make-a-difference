@@ -1,0 +1,53 @@
+<section class="bg-gray-600 p-8 min-h-screen">
+  <div class="bg-white shadow rounded-lg h-[800px] md:h[200px]">
+    <div class="p-4 flex-1 overflow-auto">
+      <h2 class="text-lg font-semibold mb-2 bg-cyan-700 rounded-2xl text-center">ID Card</h2>
+
+      <div class="text-sm  text-black text-center  bg-cyan-700 rounded-3xl">
+        
+          <div #cardRef  class="student-card mb-4 p-4 flex flex-col items-center">
+            <div scope="row" class="px-4 py-2 text-2xl font-medium">Student Name : {{ student.name }}</div>
+            <div class="px-4 py-2 text-2xl font-medium">Phone : {{ student.phoneNo }}</div>
+            <div #BarcodeOnlyRef>
+              <div *ngIf="isBrowser" class="flex justify-center">
+                <qrcode
+                  [qrdata]="(student.barcodeId ?? student.id).toString()"
+                  [width]="256"
+                ></qrcode>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-2 mt-4">
+            <button
+              [routerLink]="'/student'"
+              class="text-sm cursor-pointer font-sans rounded-2xl bg-amber-400 px-2 m-2 mb-4 mt-4"
+            >
+              Back to list
+            </button>
+            <button
+              (click)="saveFullCard(cardRef, student.name)"
+              class="text-sm cursor-pointer font-sans rounded-2xl bg-amber-400 px-2 mb-4 m-2 mt-4"
+            >
+              Save Full Card
+            </button>
+            <button
+              (click)="saveBarcodeOnly(BarcodeOnlyRef, student.name)"
+              class="text-sm cursor-pointer font-sans rounded-2xl bg-amber-400 px-2 mb-4 m-2 mt-4"
+            >
+              Save Barcode
+            </button>
+            <button
+              [routerLink]="['/update',student.name,student.id]"
+              class="text-sm cursor-pointer font-sans rounded-2xl bg-amber-400 px-2 m-2 mb-4 mt-4"
+            >
+              Edit
+            </button>
+          </div>
+        
+      </div>
+
+      <div></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,179 @@
+<section class="bg-amber-500 p-10 min-h-screen">
+  <div class="p-6 order-1 md:order-1">
+    <div class="text-center rounded-2xl colo1">
+      <h2 class="text-lg font-bold md:text-2xl">
+        Event: {{ eventData?.name }}
+      </h2>
+    </div>
+      <!-- Open Button -->
+     <div class="order-2 md:order-2 p-4 col-span-6 md:col-span-5 flex justify-end">
+
+      <button
+ (click)="goToPage(item)" 
+  class="btn btn1   text-black md:w-32
+   px-4 py-2 rounded-lg"
+>
+  Export Excel
+</button>
+     </div>
+    
+      <!-- (click)="showModal = true" -->
+
+     
+
+    <div class="grid grid-cols-1  md:grid-cols-2 gap-4 p-3">
+
+      <app-availabel  class="pt-2 order-1  md:order-2"
+      (studentAdded)="onStudentAdded($event)"
+       [refreshTrigger]="refreshAvailable"></app-availabel>
+
+
+
+      <!-- Current Students -->
+      <div class="order-2  md:order-1 bg-white shadow rounded-lg flex flex-col h-[500px] md:h[200px]">
+        <div class="p-4 flex-1 overflow-auto">
+          <h2 class="text-lg font-semibold mb-2 text-center">Current Students</h2>
+
+          <div class="flex justify-between mb-2">
+            <div>
+              <label>
+                <select [(ngModel)]="availableEntries" name="entries" class="border rounded px-6 py-1">
+                  <option *ngFor="let e of [5,10,15,20]">{{ e }}</option>
+                </select>
+                entries
+              </label>
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Search..."
+                [(ngModel)]="availableSearch"
+                name="search"
+                class="border border-gray-400 rounded px-2 py-1"
+              />
+            </div>
+          </div>
+
+          <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+            <table class="w-full text-sm text-left rtl:text-right text-body">
+              <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
+                <tr>
+                  <th class="px-6 py-3 font-medium">Student Name</th>
+                  <th class="px-6 py-3 font-medium">Phone</th>
+                  <th class="px-6 py-3 font-medium">Select</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let student of (currentStudents || []) | search: availableSearch"
+                    class="bg-neutral-primary-soft border-b border-default">
+                  <th class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                    {{ student.studentName }}
+                  </th>
+                  <td class="px-6 py-4 font-medium">
+                    {{ student.studentPhoneNo }}
+                  </td>
+                  <td class="px-6 py-4 font-medium">
+                    <div class="flex items-center">
+                      <input type="checkbox" [(ngModel)]="student.selected" name="select{{ student.id }}"
+                             class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft" />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4 flex justify-center">
+            <button (click)="deleteSelectedStudents()" class="btn btnn2 md:w-32">Delete Student</button>
+          </div>
+        </div>
+      </div>
+
+       <!-- Available Students Component -->
+
+
+     
+    </div>
+
+
+
+  
+
+
+<!-- Modal -->
+<!-- <div
+  *ngIf="showModal"
+  class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+>
+
+  <div class="bg-white w-[90%] max-w-md rounded-2xl p-6 shadow-xl">
+
+    <h2 class="text-xl font-bold mb-4">
+      Export Attendance
+    </h2>
+
+    <div class="mb-4">
+      <label class="block mb-2 font-medium">
+        Select Meeting
+      </label>
+     
+
+      <select
+        [(ngModel)]="meetingId"
+        class="w-full border rounded-lg p-2"
+       
+      >
+     
+       
+        <option
+          *ngFor="let meeting of allMeeting"
+          [value]="meeting.id"
+          
+        >
+          {{ meeting.name }}
+        </option>
+      </select>
+    </div>
+
+=    <div class="mb-6">
+      <label class="block mb-2 font-medium">
+        Student Phone
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="studentPhone"
+        placeholder="Enter phone number"
+        class="w-full border rounded-lg p-2"
+      />
+    </div>
+
+ 
+    <div class="flex justify-end gap-3">
+
+      <button
+        (click)="closeModal()"
+        class="bg-gray-300 px-4 py-2 rounded-lg"
+      >
+        Cancel
+      </button>
+
+      <button
+        (click)="confirmExport()"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg"
+      >
+        OK
+      </button>
+
+    </div>
+
+  </div>
+
+</div> -->
+
+
+
+
+  </div>
+</section>

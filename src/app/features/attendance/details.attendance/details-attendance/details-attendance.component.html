@@ -1,0 +1,199 @@
+<section class="bg-gray-600 p-6 min-h-screen overflow-auto">
+    <div class=" bg-white shadow rounded-lg   ">
+        <div class="p-4  overflow-auto">
+      <h2 class="text-2xl font-semibold mb-2 text-center">Creat Attendance</h2>
+
+    </div>
+    <hr class="text-gray-600">
+    <form [formGroup]="formattendance"  (ngSubmit)="CreatStudent()">
+         <div class="grid grid-cols-1 px-4 p-6 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-6 mb-4  ">
+
+            <div  class="md:order-1 flex flex-col items-center lg:col-span-3">
+           <label class="block mb-2   text-sm font-medium text-heading">Event Name</label>
+           <select formControlName="eventId"
+    class="bg-neutral-secondary-medium border border-default-medium
+               text-heading text-base sm:text-lg
+               rounded-base block w-xs
+               h-10 sm:h-12 px-3 sm:px-4">
+   
+    <option *ngFor="let event of event" [value]="event.id">
+      {{ event.name }}
+    </option>
+
+  </select>
+        </div>
+
+         <div class="md:order-2 flex flex-col items-center lg:col-span-3">
+           <label class="block mb-2  text-sm font-medium text-heading">Meeting Name</label>
+           <select formControlName="meetingId"
+    class="bg-neutral-secondary-medium border border-default-medium
+               text-heading text-base sm:text-lg
+               rounded-base block w-xs
+               h-10 sm:h-12 px-3 sm:px-4 "   >
+   
+    <option  *ngFor="let meeting of filteredMeetings" [value]="meeting.id" > 
+       {{ meeting.name }}
+    </option>
+
+  </select>
+        </div>
+
+        
+         </div>
+
+         <!-- 2 -->
+
+
+         <h2 class="text-2xl text-center font-sans">
+      Qr Code Student Scanner
+    </h2>
+   <div class="flex justify-center m-4 ">
+  <div class=" border-4 border-blue-500 rounded-xl overflow-hidden">
+    
+
+    <zxing-scanner
+      [enable]="isScannerEnabled"
+      (scanSuccess)="onCodeResult($event)">
+    </zxing-scanner>
+
+  </div>
+  
+</div>
+<div class="md:order-1 col-span-6 md:col-span-5 text-center flex justify-center ">
+  <button class="btn btn1 md:w-32"
+  (click)="startScanner()"
+  [disabled]="!isFormReady"
+  type="button"
+  >
+Switch Camra
+</button>
+
+</div>
+<div *ngIf="showTables" >
+
+  <div class="m-4 p-4">
+  <h2 *ngFor="let item of attendancebarcode" class="text-center text-2xl font-sans">scanned  Qr code value:{{item.barcodeId}}</h2>
+<div class="relative m-4 bg-neutral-primary shadow-xs rounded-base border border-gray-400 overflow-auto max-h-[400px] ">
+  
+<h2 class="text-2xl text-center font-sans ">
+  student Data
+</h2>
+    <table class="w-full text-sm text-center rtl:text-right text-body">
+        <thead class="text-sm text-body border-b border-black">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-gray-200 font-sans">
+                    name
+                </th>
+                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                    Scan time
+                </th>
+               
+            </tr>
+        </thead>
+      <tbody>
+         <tr *ngFor="let item of attendancebarcode " class="border-b border-default">
+                <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+                    {{item.name}}
+                </th>
+                <td class="px-6 py-4 bg-gray-200">
+                    {{item.scanTime | date:'HH:mm:ss'}}
+                </td>
+          
+            </tr>
+        
+      </tbody>
+
+    </table>
+    
+
+
+  </div>
+</div>
+
+<section >
+  <div class="m-4 p-4">
+<div class="relative m-4 bg-gray-200 shadow-xs rounded-base border border-gray-400 overflow-auto max-h-[400px] ">
+  
+
+    <table class="w-full text-sm  text-center rtl:text-right text-body">
+        <thead class="text-sm text-body border-b border-black">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-gray-200 font-sans">
+                    name
+                </th>
+                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                    Event
+                </th>
+                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                    Meeting
+                </th>
+                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                    Attendance Time
+                </th>
+                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                    Delete
+                </th>
+               
+            </tr>
+        </thead>
+      <tbody>
+       <tr *ngFor="let item of Attendance; trackBy: trackByBarcodeId" class="border-b border-default">
+  <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+      {{item.studentName}}
+  </th>
+  <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+      {{item.eventName}}
+  </td>
+  <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+      {{item.meetingName}}
+  </td>
+  <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+      {{item.attendanceTime | date:'HH:mm:ss'}}
+  </td>
+  <td (click)="removeStudent(item.studentId)" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
+      <i class="fa-solid fa-trash hover:text-red-700 cursor-pointer"></i>
+  </td>
+</tr>
+         
+        
+      </tbody>
+      
+     
+    </table>
+     <div class="flex my-4 md:justify-end justify-center l:justify-center">
+         <button  type="submit"  class="btn btn1 md:w-32 mx-2 b-2  "> Creat @if (isLoading) {
+              <span><i class="fas fa-spinner animate-spin"></i></span>
+              }</button>
+                      <button [routerLink]="'/attendance'" class="btn btn1 md:w-32 mx-4 p-2 "> Back List</button>
+
+        
+      
+
+
+    </div>
+
+   
+    
+
+
+  </div>
+</div>
+</section>
+
+</div>
+
+
+
+        
+    </form>
+    
+
+
+<!-- *ngFor="let item of Attendance"  -->
+
+</div>
+
+
+    
+
+</section>
