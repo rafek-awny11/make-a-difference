@@ -30,7 +30,7 @@ body{
     @apply  disabled:bg-gray-500 disabled:cursor-not-allowed  rounded-2xl bg-amber-400 py-1.5 w-full cursor-pointer font-bold hover:bg-red-600 transition-all duration-300 };
 
  .main-input{
-    @apply block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none dark:text-white   focus:outline-none focus:ring-0 focus:border-gray-500
+    @apply block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-gray-500
   };
 
    .main-label {
