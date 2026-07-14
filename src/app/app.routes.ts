@@ -30,24 +30,24 @@ export const routes: Routes = [
     {path: '' , component:BlankLayoutsComponent , canActivate:[authGuard], children:[
     {path: 'home' , component:HomeComponent, title: 'Make A Difference Mission' },
     {path: 'student' , component:StudentComponent, title:'Make A Difference Mission'},
-    {path: 'studentDetails/:slug /:id' , component:StudentDetailsComponent , title:'Make A Difference Mission'},
+    {path: 'studentDetails/:slug/:id' , component:StudentDetailsComponent , title:'Make A Difference Mission'},
     {path: 'studentDetails/:id' , component:StudentDetailsComponent , title:'Make A Difference Mission'},
-    {path: 'update/:slug /:id' , component:UpdateComponent , title:'Make A Difference Mission'},
+    {path: 'update/:slug/:id' , component:UpdateComponent , title:'Make A Difference Mission'},
     {path: 'update/:id' , component:UpdateComponent , title:'Make A Difference Mission'},
 
     {path: 'attendance' , component:AttendanceComponent, title:'Make A Difference Mission'},
         {path: 'show-details' , component:ShowDetailsComponent, title:'Make A Difference Mission'},
-        {path: 'show-details/:slug /:id' , component:ShowDetailsComponent, title:'Make A Difference Mission'},
+        {path: 'show-details/:slug/:id' , component:ShowDetailsComponent, title:'Make A Difference Mission'},
 
     {path: 'details-attendance' , component:DetailsAttendanceComponent, title:'Make A Difference Mission'},
     {path: 'event' , component:EventComponent, title: 'Event'},
     {path: 'meeting' , component:MeetingComponent, title: 'Make A Difference Mission'},
     {path: 'create-meeting' , component:CreateMeetingComponent, title: 'Make A Difference Mission'},
-    {path: 'update-meeting/:slug /:id' , component:UpdateMeetingComponent, title: 'Make A Difference Mission'},
+    {path: 'update-meeting/:slug/:id' , component:UpdateMeetingComponent, title: 'Make A Difference Mission'},
     {path: 'update-meeting/:id' , component:UpdateMeetingComponent, title: 'Make A Difference Mission'},
 
 
-    {path: 'details-meeting/:slug /:id' , component:DetailsMeetingComponent, title: 'Make A Difference Mission'},
+    {path: 'details-meeting/:slug/:id' , component:DetailsMeetingComponent, title: 'Make A Difference Mission'},
     {path: 'details-meeting/:id' , component:DetailsMeetingComponent, title: 'Make A Difference Mission'},
 
 
