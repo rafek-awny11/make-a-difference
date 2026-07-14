@@ -12,6 +12,7 @@ import * as XLSX from 'xlsx';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
+
 (pdfMake as any).vfs = (pdfFonts as any).vfs;
 
 
@@ -28,7 +29,8 @@ export class AttendanceComponent implements OnInit {
   private readonly attendanceService =inject(AttendanceService);
   private readonly studentService =inject(StudentService);
   private readonly toastrService =inject(ToastrService);
-  private readonly router=inject(Router)
+  private readonly router=inject(Router);
+  
   
 
   
@@ -47,7 +49,7 @@ allattendance:Attendance1 []=[]
   this.attendanceService.getAllAttendance().subscribe({
     next: (res) => {
       console.log(res);
-      this.allattendance = res; // ✅ دي كانت ناقصة
+      this.allattendance = res; // 
     },
     error: (err) => {
       console.log(err);

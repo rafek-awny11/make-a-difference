@@ -51,6 +51,29 @@ exportFile(
     }
   );
 }
+showAttendance(
+  eventId: number,
+  meetingId?: number,
+  studentPhone?: string
+): Observable<any> {
+
+  let params: any = {
+    EventId: eventId
+  };
+
+  if (meetingId != null) {
+    params.MeetingId = meetingId;
+  }
+
+  if (studentPhone?.trim()) {
+    params.StudentPhone = studentPhone.trim();
+  }
+
+  return this.httpClient.get(
+    environment.baseUrl + 'Attendance/GetAllAttendancesList',
+    { params }
+  );
+}
 
 
 }

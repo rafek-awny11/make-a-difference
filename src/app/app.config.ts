@@ -7,13 +7,14 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import {CookieService} from 'ngx-cookie-service';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { provideToastr } from 'ngx-toastr';
+import { headersInterceptor } from './core/interceptors/headers-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withInMemoryScrolling({scrollPositionRestoration:'top'})), provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch() , withInterceptors([errorInterceptor])),
+    provideHttpClient(withFetch() , withInterceptors([headersInterceptor,errorInterceptor])),
     importProvidersFrom(CookieService),
     provideAnimations(),
     provideToastr(), 

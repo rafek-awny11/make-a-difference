@@ -36,7 +36,7 @@
 
       <button
         type="button"
-        (click)="showTable = true"
+        (click)="showAttendance()"
         class="btn btn1 text-black md:w-32 px-4 py-2 rounded-lg"
       >
         show all
@@ -51,31 +51,28 @@
     <table class="w-full text-sm text-left rtl:text-right text-body">
       <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
         <tr>
-          <th scope="col" class="px-6 py-3 font-medium">Event Name</th>
-          <th scope="col" class="px-6 py-3 font-medium">Meeting Name</th>
           <th scope="col" class="px-6 py-3 font-medium">Name</th>
-          <th scope="col" class="px-6 py-3 font-medium">phone</th>
-          <th scope="col" class="px-6 py-3 font-medium">Date:Time</th>
+          <th scope="col" class="px-6 py-3 font-medium">وقت الخدمة</th>
+          <th scope="col" class="px-6 py-3 font-medium">وقت الحضور</th>
+          <!-- <th scope="col" class="px-6 py-3 font-medium">التاخير</th> -->
+         
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of data" class="bg-neutral-primary-soft border-b border-default">
+        <tr *ngFor="let item of eventList" class="bg-neutral-primary-soft border-b border-default">
           <td scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-            {{ item.meeting?.event?.name }}
-          </td>
-          <td class="px-6 py-4 font-sans">
-            {{ item.meeting?.name }}
-          </td>
-          <td class="px-6 py-4 font-sans">
             {{ item.studentName }}
           </td>
           <td class="px-6 py-4 font-sans">
-            {{ item.studentPhone }}
-            {{ item.attendance }}
+            {{ item.meeting.meetingTime }}
           </td>
-          <td class="px-6 py-4 font-sans text-fg-brand">
-            {{ item.attendanceTime ? (item.attendanceTime | date: 'short') : '' }}
+          <td class="px-6 py-4 font-sans">
+           {{item.attendanceTime}}
           </td>
+          <!-- <td class="px-6 py-4 font-sans">
+         
+          </td> -->
+      
         </tr>
       </tbody>
     </table>

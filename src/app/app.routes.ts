@@ -14,11 +14,21 @@ import { DetailsMeetingComponent } from './features/meeting/details-meeting/deta
 import { UpdateMeetingComponent } from './features/meeting/update-meeting/update-meeting/update-meeting.component';
 import { DetailsAttendanceComponent } from './features/attendance/details.attendance/details-attendance/details-attendance.component';
 import { ShowDetailsComponent } from './features/attendance/show-details/show-details/show-details.component';
+import { MainLayoutsComponent } from './core/layouts/main-layouts/main-layouts.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { authGuard } from './core/guards/auth-guard';
+import { isLoggedGuard } from './core/guards/is-logged-guard';
 
 export const routes: Routes = [
     {path: '' , redirectTo: 'home' , pathMatch: 'full'},
-    {path: '' , component:BlankLayoutsComponent , children:[
-    {path: 'home' , component:HomeComponent, title: 'Make A Difference Mission'},
+    {path: '', component:MainLayoutsComponent,canActivate:[isLoggedGuard], children:[
+        {path:'login', component:LoginComponent,title: 'Login'},
+        {path:'register', component:RegisterComponent,title:'Register'},
+        
+    ]},
+    {path: '' , component:BlankLayoutsComponent , canActivate:[authGuard], children:[
+    {path: 'home' , component:HomeComponent, title: 'Make A Difference Mission' },
     {path: 'student' , component:StudentComponent, title:'Make A Difference Mission'},
     {path: 'studentDetails/:slug /:id' , component:StudentDetailsComponent , title:'Make A Difference Mission'},
     {path: 'studentDetails/:id' , component:StudentDetailsComponent , title:'Make A Difference Mission'},

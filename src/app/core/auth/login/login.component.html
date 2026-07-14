@@ -1,0 +1,77 @@
+<section class="my-10 bg-white rounded-2xl border border-gray-300 shadow-2xl md:w-1/2 mx-auto ">
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="max-w-md mx-auto mt-4" >
+  <div class="relative z-0 w-full mb-5 group">
+      <input formControlName="userName" type="text"   id="name" class="main-input peer" placeholder=" " required />
+      <label for="name" class="main-label">Name</label>
+
+      @let nameControl = loginForm.get('userName');
+
+      @if (nameControl?.errors && nameControl?.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-2xl bg-red-200  " role="alert">
+            <ul class="mt-2 list-disc list-inside ">
+                @if (nameControl?.getError('required')) {
+                    <li>Input is required.</li>
+                }@else if (nameControl?.getError('minlength')) {
+                    <li>Input should be more than or equal 2 chars</li>
+                }@else if (nameControl?.getError('maxlength')) {
+                    <li>Input should be less than or equal 20 chars</li>
+                }
+                
+            </ul>
+            
+
+        </div>
+
+      }
+  </div>
+
+
+
+  <div class="relative z-0 w-full mb-5 group">
+      <input formControlName="password" type="password"  id="password" class="main-input peer" placeholder=" " required />
+      <label for="password" class="main-label">Password</label>
+
+      @let passwordControl = loginForm.get('password');
+
+      @if (passwordControl?.errors && passwordControl?.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-2xl bg-red-200  " role="alert">
+            <ul class="mt-2 list-disc list-inside ">
+                @if (passwordControl?.getError('required')) {
+                    <li>Input is required.</li>
+                }@else if (passwordControl?.getError('pattern')) {
+                    <li>custom field should match the pattern</li>
+                }
+                
+            </ul>
+            
+
+        </div>
+
+      }
+  </div>
+ 
+  
+
+
+
+  
+  <button [disabled]="isLoading"  type="submit" class="btn btn1 my-4 ">Login
+    @if(isLoading){
+<span><i class="fas fa-spinner animate-spin"></i></span>
+    }
+  </button>
+@if (msgErorr) {
+      <p class="text-center text-red-900 mt-2 p-4 bg-red-300">{{msgErorr}}</p>
+
+}
+ <button class="btn btnn2 my-4" [routerLink]="['/register']">
+                sign Up
+
+            </button>
+
+
+</form>
+
+</section>
+
+

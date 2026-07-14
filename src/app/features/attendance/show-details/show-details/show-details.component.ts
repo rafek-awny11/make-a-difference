@@ -119,4 +119,42 @@ export class ShowDetailsComponent implements OnInit {
   confirmExport(): void {
     this.exportAttendanceExcel();
   }
+
+
+
+  showAttendance(): void {
+
+  if (!this.id) {
+    this.toastrService.error('Event Id not found');
+    return;
+  }
+
+  this.attendanceService
+    .showAttendance(
+      this.id,
+      this.meetingId || undefined,
+      this.studentPhone
+    )
+    .subscribe({
+
+      next: (res) => {
+
+        this.eventList = res;
+        console.log(res);
+        
+
+        this.showTable = true;
+
+      },
+
+      error: (err) => {
+        console.log(err);
+        this.toastrService.error('Failed to load data');
+      }
+
+    });
+
+}
+
+
 }

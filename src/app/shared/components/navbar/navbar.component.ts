@@ -1,7 +1,8 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit } from '@angular/core';
 import { FlowbiteService } from '../../../core/services/flowbite.service';
 import { initFlowbite } from 'flowbite';
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from '../../../core/auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,7 @@ export class NavbarComponent implements OnInit {
 // constructor(private flowbiteService: FlowbiteService) {}
 
 constructor(private el: ElementRef) {}
+private readonly authService =inject(AuthService)
 
 
 isOpen = false;
@@ -39,5 +41,9 @@ isOpen = false;
     if (!this.el.nativeElement.contains(event.target)) {
       this.isOpen = false;
     }
+  }
+
+  signOut():void{
+    this.authService.logOut()
   }
 }
