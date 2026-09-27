@@ -24,9 +24,37 @@ export class AuthService {
     return this.httpClient.post(environment.baseUrl + 'User/Login' , data)
   }
 
-  logOut():void {
-    this.cookieService.delete('token')
-    this.router.navigate(['/login'])
+   saveUser(user: any): void {
+  this.cookieService.set('userInfo', JSON.stringify(user));
+}
+
+  // جلب بيانات المستخدم
+ getCurrentUser(): any {
+  const user = this.cookieService.get('userInfo');
+
+  console.log('Cookie Value:', user);
+
+  if (user) {
+    return JSON.parse(user);
+  }
+
+  return null;
+}
+
+  // جلب اسم المستخدم
+getUserName(): string {
+  const user = this.getCurrentUser();
+  return user?.userName || '';
+}
+
+getFirstLetter(): string {
+  const name = this.getUserName();
+  return name ? name.charAt(0).toUpperCase() : '';
+}
+  logOut(): void {
+    this.cookieService.delete('token');
+this.cookieService.delete('userInfo');
+    this.router.navigate(['/login']);
   }
   
 }

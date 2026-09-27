@@ -1,199 +1,673 @@
-<section class="bg-gray-600 p-6 min-h-screen overflow-auto">
-    <div class=" bg-white shadow rounded-lg   ">
-        <div class="p-4  overflow-auto">
-      <h2 class="text-2xl font-semibold mb-2 text-center">Creat Attendance</h2>
+
+<section class="bg-light min-vh-100 py-4 py-md-5">
+
+  <div class="container-fluid px-3 px-md-4 px-lg-5">
+
+    <!-- ================= HEADER ================= -->
+
+    <div
+      class="d-flex flex-column flex-md-row
+             justify-content-between align-items-md-center
+             gap-3 mb-4"
+    >
+
+      <div>
+
+        <h2 class="fw-bold mb-1">
+
+          <i class="fa-solid fa-clipboard-check text-primary me-2"></i>
+
+          Create Attendance
+
+        </h2>
+
+        <p class="text-secondary mb-0">
+          Select an event and meeting, then scan student QR codes.
+        </p>
+
+      </div>
+
+
+      <!-- Back -->
+
+      <button
+        type="button"
+        [routerLink]="'/attendance'"
+        class="btn btn-light border px-4 py-2 rounded-3 shadow-sm"
+      >
+
+        <i class="fa-solid fa-arrow-left me-2 text-primary"></i>
+
+        Back List
+
+      </button>
 
     </div>
-    <hr class="text-gray-600">
-    <form [formGroup]="formattendance"  (ngSubmit)="CreatStudent()">
-         <div class="grid grid-cols-1 px-4 p-6 sm:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-6 mb-4  ">
 
-            <div  class="md:order-1 flex flex-col items-center lg:col-span-3">
-           <label class="block mb-2   text-sm font-medium text-heading">Event Name</label>
-           <select formControlName="eventId"
-    class="bg-neutral-secondary-medium border border-default-medium
-               text-heading text-base sm:text-lg
-               rounded-base block w-xs
-               h-10 sm:h-12 px-3 sm:px-4">
-   
-    <option *ngFor="let event of event" [value]="event.id">
-      {{ event.name }}
-    </option>
 
-  </select>
+    <form
+      [formGroup]="formattendance"
+      (ngSubmit)="CreatStudent()"
+    >
+
+
+      <!-- ================================================= -->
+      <!-- EVENT + MEETING -->
+      <!-- ================================================= -->
+
+      <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body p-3 p-md-4">
+
+          <div class="mb-4">
+
+            <h5 class="fw-bold mb-1">
+              Attendance Information
+            </h5>
+
+            <p class="text-secondary small mb-0">
+              Choose the event and meeting before starting the scanner.
+            </p>
+
+          </div>
+
+
+          <div class="row g-3">
+
+            <!-- Event -->
+
+            <div class="col-12 col-md-6">
+
+              <label
+                for="eventId"
+                class="form-label fw-semibold"
+              >
+                Event Name
+              </label>
+
+
+              <div class="input-group">
+
+                <span class="input-group-text bg-white">
+
+                  <i class="fa-solid fa-calendar-days text-primary"></i>
+
+                </span>
+
+
+                <select
+                  id="eventId"
+                  formControlName="eventId"
+                  class="form-select"
+                >
+
+                  <option
+                    *ngFor="let event of event"
+                    [value]="event.id"
+                  >
+                    {{ event.name }}
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <!-- Meeting -->
+
+            <div class="col-12 col-md-6">
+
+              <label
+                for="meetingId"
+                class="form-label fw-semibold"
+              >
+                Meeting Name
+              </label>
+
+
+              <div class="input-group">
+
+                <span class="input-group-text bg-white">
+
+                  <i class="fa-solid fa-people-group text-primary"></i>
+
+                </span>
+
+
+                <select
+                  id="meetingId"
+                  formControlName="meetingId"
+                  class="form-select"
+                >
+
+                  <option
+                    *ngFor="let meeting of filteredMeetings"
+                    [value]="meeting.id"
+                  >
+                    {{ meeting.name }}
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
-         <div class="md:order-2 flex flex-col items-center lg:col-span-3">
-           <label class="block mb-2  text-sm font-medium text-heading">Meeting Name</label>
-           <select formControlName="meetingId"
-    class="bg-neutral-secondary-medium border border-default-medium
-               text-heading text-base sm:text-lg
-               rounded-base block w-xs
-               h-10 sm:h-12 px-3 sm:px-4 "   >
-   
-    <option  *ngFor="let meeting of filteredMeetings" [value]="meeting.id" > 
-       {{ meeting.name }}
-    </option>
+      </div>
 
-  </select>
+
+      <!-- ================================================= -->
+      <!-- QR SCANNER -->
+      <!-- ================================================= -->
+
+      <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <!-- Scanner Header -->
+
+        <div class="card-header bg-white border-0 p-3 p-md-4">
+
+          <div class="text-center">
+
+            <div
+              class="bg-primary bg-opacity-10
+                     rounded-circle
+                     d-inline-flex align-items-center
+                     justify-content-center mb-3"
+              style="width: 55px; height: 55px;"
+            >
+
+              <i class="fa-solid fa-qrcode text-primary fs-4"></i>
+
+            </div>
+
+
+            <h4 class="fw-bold mb-1">
+              QR Code Student Scanner
+            </h4>
+
+            <p class="text-secondary mb-0">
+              Scan the student's QR code to add attendance.
+            </p>
+
+          </div>
+
         </div>
 
-        
-         </div>
 
-         <!-- 2 -->
+        <!-- Scanner Body -->
 
+        <div class="card-body p-3 p-md-4">
 
-         <h2 class="text-2xl text-center font-sans">
-      Qr Code Student Scanner
-    </h2>
-   <div class="flex justify-center m-4 ">
-  <div class=" border-4 border-blue-500 rounded-xl overflow-hidden">
-    
+          <div class="d-flex justify-content-center">
 
-    <zxing-scanner
-      [enable]="isScannerEnabled"
-      (scanSuccess)="onCodeResult($event)">
-    </zxing-scanner>
+            <div
+              class="border border-primary
+                     rounded-4 overflow-hidden
+                     bg-dark shadow-sm w-100"
+              style="max-width: 600px;"
+            >
 
-  </div>
-  
-</div>
-<div class="md:order-1 col-span-6 md:col-span-5 text-center flex justify-center ">
-  <button class="btn btn1 md:w-32"
-  (click)="startScanner()"
-  [disabled]="!isFormReady"
-  type="button"
-  >
-Switch Camra
-</button>
+              <zxing-scanner
+                [enable]="isScannerEnabled"
+                (scanSuccess)="onCodeResult($event)"
+              >
+              </zxing-scanner>
 
-</div>
-<div *ngIf="showTables" >
+            </div>
 
-  <div class="m-4 p-4">
-  <h2 *ngFor="let item of attendancebarcode" class="text-center text-2xl font-sans">scanned  Qr code value:{{item.barcodeId}}</h2>
-<div class="relative m-4 bg-neutral-primary shadow-xs rounded-base border border-gray-400 overflow-auto max-h-[400px] ">
-  
-<h2 class="text-2xl text-center font-sans ">
-  student Data
-</h2>
-    <table class="w-full text-sm text-center rtl:text-right text-body">
-        <thead class="text-sm text-body border-b border-black">
-            <tr>
-                <th scope="col" class="px-6 py-3 bg-gray-200 font-sans">
-                    name
-                </th>
-                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
-                    Scan time
-                </th>
-               
-            </tr>
-        </thead>
-      <tbody>
-         <tr *ngFor="let item of attendancebarcode " class="border-b border-default">
-                <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
-                    {{item.name}}
-                </th>
-                <td class="px-6 py-4 bg-gray-200">
-                    {{item.scanTime | date:'HH:mm:ss'}}
-                </td>
-          
-            </tr>
-        
-      </tbody>
-
-    </table>
-    
+          </div>
 
 
-  </div>
-</div>
+          <!-- Switch Camera -->
 
-<section >
-  <div class="m-4 p-4">
-<div class="relative m-4 bg-gray-200 shadow-xs rounded-base border border-gray-400 overflow-auto max-h-[400px] ">
-  
+          <div class="text-center mt-4">
 
-    <table class="w-full text-sm  text-center rtl:text-right text-body">
-        <thead class="text-sm text-body border-b border-black">
-            <tr>
-                <th scope="col" class="px-6 py-3 bg-gray-200 font-sans">
-                    name
-                </th>
-                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+            <button
+              type="button"
+              (click)="startScanner()"
+              [disabled]="!isFormReady"
+              class="btn btn-primary px-4 py-2 rounded-3"
+            >
+
+              <i class="fa-solid fa-camera me-2"></i>
+
+              Switch Camera
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- TABLES -->
+      <!-- ================================================= -->
+
+      <div *ngIf="showTables">
+
+
+        <!-- ================================================= -->
+        <!-- LAST SCANNED STUDENT -->
+        <!-- ================================================= -->
+
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+          <!-- Header -->
+
+          <div class="card-header bg-white border-0 p-3 p-md-4">
+
+            <div
+              class="d-flex flex-column flex-md-row
+                     justify-content-between
+                     align-items-md-center gap-3"
+            >
+
+              <div>
+
+                <h5 class="fw-bold mb-1">
+
+                  <i class="fa-solid fa-user-check text-success me-2"></i>
+
+                  Student Data
+
+                </h5>
+
+                <p class="text-secondary small mb-0">
+                  Recently scanned student information.
+                </p>
+
+              </div>
+
+
+              <!-- Scanned Barcode -->
+
+              <div>
+
+                <div
+                  *ngFor="let item of attendancebarcode"
+                  class="badge bg-success bg-opacity-10
+                         text-success border border-success
+                         px-3 py-2 rounded-3"
+                >
+
+                  <i class="fa-solid fa-qrcode me-2"></i>
+
+                  {{ item.barcodeId }}
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Table -->
+
+          <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+              <thead class="table-light">
+
+                <tr>
+
+                  <th class="px-3 px-md-4 py-3">
+                    Student Name
+                  </th>
+
+                  <th class="py-3">
+                    Scan Time
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <tr *ngFor="let item of attendancebarcode">
+
+                  <!-- Name -->
+
+                  <td class="px-3 px-md-4 py-3">
+
+                    <div class="d-flex align-items-center gap-3">
+
+                      <div
+                        class="bg-success bg-opacity-10
+                               rounded-3
+                               d-flex align-items-center
+                               justify-content-center
+                               shrink-0"
+                        style="width: 42px; height: 42px;"
+                      >
+
+                        <i class="fa-solid fa-user text-success"></i>
+
+                      </div>
+
+
+                      <span class="fw-semibold text-dark">
+
+                        {{ item.name }}
+
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- Scan Time -->
+
+                  <td class="py-3">
+
+                    <div class="d-flex align-items-center gap-2">
+
+                      <i class="fa-regular fa-clock text-success"></i>
+
+                      <span class="text-secondary">
+
+                        {{ item.scanTime | date:'HH:mm:ss' }}
+
+                      </span>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ATTENDANCE LIST -->
+        <!-- ================================================= -->
+
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+          <!-- Header -->
+
+          <div class="card-header bg-white border-0 p-3 p-md-4">
+
+            <div
+              class="d-flex flex-column flex-md-row
+                     justify-content-between
+                     align-items-md-center gap-3"
+            >
+
+              <div>
+
+                <h5 class="fw-bold mb-1">
+
+                  <i class="fa-solid fa-list-check text-primary me-2"></i>
+
+                  Attendance List
+
+                </h5>
+
+                <p class="text-secondary small mb-0">
+                  Students scanned for the selected meeting.
+                </p>
+
+              </div>
+
+
+              <!-- Count -->
+
+              <span
+                class="badge bg-primary bg-opacity-10
+                       text-primary px-3 py-2 rounded-3"
+              >
+
+                <i class="fa-solid fa-users me-2"></i>
+
+                {{ Attendance.length }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- Attendance Table -->
+
+          <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+              <thead class="table-light">
+
+                <tr>
+
+                  <th class="px-3 px-md-4 py-3">
+                    Name
+                  </th>
+
+                  <th class="py-3">
                     Event
-                </th>
-                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                  </th>
+
+                  <th class="py-3">
                     Meeting
-                </th>
-                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                  </th>
+
+                  <th class="py-3">
                     Attendance Time
-                </th>
-                <th scope="col" class="px-6 py-3 font-sans bg-gray-200">
+                  </th>
+
+                  <th class="text-center py-3">
                     Delete
-                </th>
-               
-            </tr>
-        </thead>
-      <tbody>
-       <tr *ngFor="let item of Attendance; trackBy: trackByBarcodeId" class="border-b border-default">
-  <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
-      {{item.studentName}}
-  </th>
-  <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
-      {{item.eventName}}
-  </td>
-  <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
-      {{item.meetingName}}
-  </td>
-  <td class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
-      {{item.attendanceTime | date:'HH:mm:ss'}}
-  </td>
-  <td (click)="removeStudent(item.studentId)" class="px-6 py-4 font-medium text-heading whitespace-nowrap bg-gray-200">
-      <i class="fa-solid fa-trash hover:text-red-700 cursor-pointer"></i>
-  </td>
-</tr>
-         
-        
-      </tbody>
-      
-     
-    </table>
-     <div class="flex my-4 md:justify-end justify-center l:justify-center">
-         <button  type="submit"  class="btn btn1 md:w-32 mx-2 b-2  "> Creat @if (isLoading) {
-              <span><i class="fas fa-spinner animate-spin"></i></span>
-              }</button>
-                      <button [routerLink]="'/attendance'" class="btn btn1 md:w-32 mx-4 p-2 "> Back List</button>
+                  </th>
 
-        
-      
+                </tr>
+
+              </thead>
 
 
-    </div>
+              <tbody>
 
-   
-    
+                <tr
+                  *ngFor="
+                    let item of Attendance;
+                    trackBy: trackByBarcodeId
+                  "
+                >
 
+                  <!-- Student -->
+
+                  <td class="px-3 px-md-4 py-3">
+
+                    <div class="d-flex align-items-center gap-3">
+
+                      <div
+                        class="bg-primary bg-opacity-10
+                               rounded-3
+                               d-flex align-items-center
+                               justify-content-center
+                               flex-shrink-0"
+                        style="width: 42px; height: 42px;"
+                      >
+
+                        <i class="fa-solid fa-user text-primary"></i>
+
+                      </div>
+
+
+                      <span class="fw-semibold text-dark">
+
+                        {{ item.studentName }}
+
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- Event -->
+
+                  <td class="py-3">
+
+                    <div class="d-flex align-items-center gap-2">
+
+                      <i class="fa-solid fa-calendar-days text-primary"></i>
+
+                      <span class="text-secondary">
+
+                        {{ item.eventName }}
+
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- Meeting -->
+
+                  <td class="py-3">
+
+                    <div class="d-flex align-items-center gap-2">
+
+                      <i class="fa-solid fa-people-group text-primary"></i>
+
+                      <span class="text-secondary">
+
+                        {{ item.meetingName }}
+
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- Attendance Time -->
+
+                  <td class="py-3">
+
+                    <div class="d-flex align-items-center gap-2">
+
+                      <i class="fa-regular fa-clock text-success"></i>
+
+                      <span class="text-secondary">
+
+                        {{ item.attendanceTime | date:'HH:mm:ss' }}
+
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- Delete -->
+
+                  <td class="text-center py-3">
+
+                    <button
+                      type="button"
+                      (click)="removeStudent(item.studentId)"
+                      class="btn btn-light border rounded-3"
+                      title="Delete Student"
+                    >
+
+                      <i class="fa-solid fa-trash text-danger"></i>
+
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- ACTION BUTTONS -->
+          <!-- ================================================= -->
+
+          <div class="card-footer bg-white border-0 p-3 p-md-4">
+
+            <div
+              class="d-flex flex-column flex-sm-row
+                     justify-content-end gap-2"
+            >
+
+              <!-- Create Attendance -->
+
+              <button
+                type="submit"
+                class="btn btn-primary px-4 py-2 rounded-3"
+              >
+
+                <i class="fa-solid fa-check me-2"></i>
+
+                Create
+
+                @if (isLoading) {
+
+                  <span class="ms-2">
+
+                    <i class="fas fa-spinner fa-spin"></i>
+
+                  </span>
+
+                }
+
+              </button>
+
+
+              <!-- Back -->
+
+              <button
+                type="button"
+                [routerLink]="'/attendance'"
+                class="btn btn-light border px-4 py-2 rounded-3"
+              >
+
+                <i class="fa-solid fa-arrow-left me-2"></i>
+
+                Back List
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
 
   </div>
-</div>
-</section>
-
-</div>
-
-
-
-        
-    </form>
-    
-
-
-<!-- *ngFor="let item of Attendance"  -->
-
-</div>
-
-
-    
 
 </section>
+

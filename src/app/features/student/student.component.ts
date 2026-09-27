@@ -4,35 +4,41 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { SearchPipe } from '../../shared/pipes/search-pipe';
 import { AllstudentService } from '../../core/services/allStudent/allstudent.service';
 import { Router, RouterLink } from '@angular/router';
-import { initFlowbite, Modal } from 'flowbite';
+import { Modal } from 'flowbite';
 import { AllStudent } from '../../core/models/all-student.interface';
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-student',
-  imports: [ReactiveFormsModule, FormsModule, SearchPipe, RouterLink],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink,CommonModule],
   templateUrl: './student.component.html',
   styleUrl: './student.component.css',
 })
 export class StudentComponent implements OnInit {
+[x: string]: any;
   private readonly allstudentService = inject(AllstudentService);
-  constructor(private FlowbiteService: FlowbiteService){}
+   
   private readonly router = inject(Router); 
   private readonly toastrService = inject(ToastrService);
   private readonly fb = inject(FormBuilder);
 
-studentData: AllStudent[]= [];
- myModal = viewChild<ElementRef>('modal');
 
+   myModal = viewChild<ElementRef>('modal');
+studentData: AllStudent[]= [];
+isModalOpen = false;
 isLoading: boolean = false;
 text:string = '';
 
 studentForm!: FormGroup
 
+
+currentPage = 1;
+itemsPerPage = 5;
+
   ngOnInit(): void {
-      this.FlowbiteService.loadFlowbite((flowbit)=>{
-        initFlowbite();
-      });
+     
       this.initForm();
       this.getAllStudentData();
   }
@@ -45,13 +51,13 @@ this.studentForm= this.fb.group({
 
 
 }
-closeModal(): void {
-  const modalEl = this.myModal()?.nativeElement;
-  if (!modalEl) return;
-   document.getElementById('open-modal-btn')?.focus();
+openModal(): void {
+  this.isModalOpen = true;
+}
 
-  const modal = new Modal(modalEl);
-  modal.hide();
+closeModal(): void {
+  this.isModalOpen = false;
+  
 }
   
 
@@ -84,9 +90,10 @@ submitForm():void{
           }
           this.studentForm.reset(); // 👈 مهم
       this.getAllStudentData(); 
+        this.isLoading = false;
        this.closeModal();
 
-          this.isLoading = false;
+        
 
 
 
@@ -125,5 +132,69 @@ submitForm():void{
       }
     })
   }
+
+get filteredStudents() {
+  const search = this.text?.toLowerCase().trim() || '';
+
+  return this.studentData.filter((student: any) =>
+    student.name?.toLowerCase().includes(search) ||
+    student.phoneNo?.toLowerCase().includes(search)
+  );
+}
+
+get totalPages() {
+  return Math.ceil(this.filteredStudents.length / this.itemsPerPage);
+}
+
+get paginatedStudents() {
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+
+  return this.filteredStudents.slice(
+    start,
+    start + this.itemsPerPage
+  );
+}
+
+get pages(): number[] {
+  return Array.from(
+    { length: this.totalPages },
+    (_, i) => i + 1
+  );
+}
+
+get currentStart() {
+  if (this.filteredStudents.length === 0) {
+    return 0;
+  }
+
+  return (this.currentPage - 1) * this.itemsPerPage + 1;
+}
+
+get currentEnd() {
+  const end = this.currentPage * this.itemsPerPage;
+
+  return end > this.filteredStudents.length
+    ? this.filteredStudents.length
+    : end;
+}
+
+changePage(page: number) {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
+  }
+}
+
+nextPage() {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+  }
+}
+
+previousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
+}
+
 
 }

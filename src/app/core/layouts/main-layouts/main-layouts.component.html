@@ -1,2 +1,34 @@
+<div class="layout">
 
-<router-outlet/>
+  <aside
+    class="sidebar-wrapper"
+    [class.sidebar-open]="isSidebarOpen"
+  >
+    <app-sidebar  (linkClick)="closeSidebarOnMobile()"></app-sidebar>
+  </aside>
+
+
+  @if (isSidebarOpen) {
+    <div
+      class="sidebar-backdrop"
+      (click)="closeSidebar()"
+    ></div>
+  }
+
+
+  <div
+    class="content"
+    [class.sidebar-active]="isSidebarOpen"
+  >
+
+    <app-navbar
+      (menuClick)="toggleSidebar()"
+    ></app-navbar>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

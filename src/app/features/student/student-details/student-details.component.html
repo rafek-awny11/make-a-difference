@@ -1,4 +1,4 @@
-<section class="bg-gray-600 p-8 min-h-screen">
+<!-- <section class="bg-gray-600 p-8 min-h-screen">
   <div class="bg-white shadow rounded-lg h-[800px] md:h[200px]">
     <div class="p-4 flex-1 overflow-auto">
       <h2 class="text-lg font-semibold mb-2 bg-cyan-700 rounded-2xl text-center">ID Card</h2>
@@ -16,7 +16,7 @@
                 ></qrcode>
               </div>
             </div>
-          </div>
+          </div>  
 
           <div class="flex flex-wrap justify-center gap-2 mt-4">
             <button
@@ -50,4 +50,602 @@
       <div></div>
     </div>
   </div>
+</section> -->
+
+
+<!-- 
+<section
+  class="min-vh-100 py-3 py-md-5"
+  style="background-color: #eef2f6;"
+>
+
+  <div class="container">
+
+    
+    <div
+      class="mx-auto overflow-hidden shadow rounded-4"
+      style="
+        max-width: 850px;
+        background-color: #ffffff;
+      "
+    >
+
+      <div class="p-3 p-md-5">
+
+
+        
+
+        <div
+          #cardRef
+          class="border rounded-4 p-3 p-md-4 mb-4 mx-auto"
+          style="
+            max-width: 600px;
+            background-color: #ffffff;
+            border-color: #dce7f2 !important;
+          "
+        >
+
+
+        
+          <div
+            class="border rounded-4 p-3 p-md-4 mb-4"
+            style="
+              background-color: #f8fbff;
+              border-color: #dce7f2 !important;
+            "
+          >
+
+
+            <div
+              class="d-flex align-items-center gap-3 mb-4"
+            >
+
+              <div
+                class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="
+                  width: 50px;
+                  height: 50px;
+                  background-color: #e1f0ff;
+                "
+              >
+
+                <i
+                  class="fa-solid fa-user-graduate"
+                  style="
+                    color: #0d6efd;
+                    font-size: 20px;
+                  "
+                ></i>
+
+              </div>
+
+
+              <div
+                class="text-start overflow-hidden"
+                style="min-width: 0;"
+              >
+
+                <div
+                  class="small mb-1"
+                  style="color: #6c757d;"
+                >
+                  Student Name
+                </div>
+
+                <div
+                  class="fw-bold fs-5 text-break"
+                  style="color: #212529;"
+                >
+                  {{ student.name }}
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <div
+              class="d-flex align-items-center gap-3"
+            >
+
+              <div
+                class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="
+                  width: 50px;
+                  height: 50px;
+                  background-color: #e1f0ff;
+                "
+              >
+
+                <i
+                  class="fa-solid fa-phone"
+                  style="
+                    color: #0d6efd;
+                    font-size: 19px;
+                  "
+                ></i>
+
+              </div>
+
+
+              <div
+                class="text-start overflow-hidden"
+                style="min-width: 0;"
+              >
+
+                <div
+                  class="small mb-1"
+                  style="color: #6c757d;"
+                >
+                  Phone
+                </div>
+
+                <div
+                  class="fw-bold fs-5 text-break"
+                  style="color: #212529;"
+                >
+                  {{ student.phoneNo }}
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+      
+
+          <div
+            #BarcodeOnlyRef
+            class="border rounded-4 p-3 p-md-4 text-center"
+            style="
+              background-color: #f8fbff;
+              border-color: #dce7f2 !important;
+            "
+          >
+
+
+            <div class="mb-3">
+
+              <h5
+                class="fw-bold mb-1"
+                style="color: #212529;"
+              >
+                Student QR Code
+              </h5>
+
+              <p
+                class="small mb-0"
+                style="color: #6c757d;"
+              >
+                Scan this QR code for student information
+              </p>
+
+            </div>
+
+
+
+            @if (isBrowser) {
+
+              <div
+                class="bg-white shadow-sm p-2 p-md-3 d-inline-flex justify-content-center align-items-center"
+                style="
+                  border-radius: 16px;
+                  max-width: 100%;
+                "
+              >
+
+                <qrcode
+                  
+
+                  [qrdata]="(student.barcodeId ?? student.id).toString()"
+                  [width]="256"
+                ></qrcode>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+ 
+        <div class="row g-2 g-md-3">
+
+
+
+          <div class="col-12 col-md-6">
+
+            <button
+              [routerLink]="'/student'"
+              type="button"
+              class="btn w-100 py-3 rounded-4 fw-semibold d-flex align-items-center justify-content-center gap-2"
+              style="
+                background-color: #eaf2fb;
+                color: #173b70;
+                border: 1px solid #d6e5f5;
+              "
+            >
+
+              <i
+                class="fa-solid fa-arrow-left"
+                style="color: #173b70;"
+              ></i>
+
+              <span>
+                Back to list
+              </span>
+
+            </button>
+
+          </div>
+
+
+
+          <div class="col-12 col-md-6">
+
+            <button
+              (click)="saveFullCard(cardRef, student.name)"
+              type="button"
+              class="btn w-100 py-3 rounded-4 fw-semibold d-flex align-items-center justify-content-center gap-2"
+              style="
+                background-color: #0d6efd;
+                color: #ffffff;
+                border-color: #0d6efd;
+              "
+            >
+
+              <i
+                class="fa-solid fa-download"
+                style="color: #ffffff;"
+              ></i>
+
+              <span>
+                Save Full Card
+              </span>
+
+            </button>
+
+          </div>
+
+
+
+          <div class="col-12 col-md-6">
+
+            <button
+              (click)="saveBarcodeOnly(BarcodeOnlyRef, student.name)"
+              type="button"
+              class="btn w-100 py-3 rounded-4 fw-semibold d-flex align-items-center justify-content-center gap-2"
+              style="
+                background-color: #198754;
+                color: #ffffff;
+                border-color: #198754;
+              "
+            >
+
+              <i
+                class="fa-solid fa-qrcode"
+                style="color: #ffffff;"
+              ></i>
+
+              <span>
+                Save Barcode
+              </span>
+
+            </button>
+
+          </div>
+
+
+
+          <div class="col-12 col-md-6">
+
+            <button
+              [routerLink]="['/update', student.name, student.id]"
+              type="button"
+              class="btn w-100 py-3 rounded-4 fw-semibold d-flex align-items-center justify-content-center gap-2"
+              style="
+                background-color: #ffc107;
+                color: #212529;
+                border-color: #ffc107;
+              "
+            >
+
+              <i
+                class="fa-solid fa-pen-to-square"
+                style="color: #212529;"
+              ></i>
+
+              <span>
+                Edit
+              </span>
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section> -->
+
+
+
+<section class="min-vh-100 py-3 py-md-5 bg-light">
+
+
+  
+
+  <div class="container">
+
+    <!-- Main Page Card -->
+    <div class="mx-auto overflow-hidden shadow rounded-4 bg-white" style="max-width: 850px;">
+
+      <div class="p-3 p-md-5">
+
+        <!-- ========================= -->
+        <!-- Student Card -->
+        <!-- ========================= -->
+
+        <div
+          #cardRef
+  data-card-ref="student-card"
+  class="border rounded-4 p-3 p-md-4 mb-4 mx-auto bg-white"
+  style="max-width: 600px;"
+        >
+
+          <!-- ========================= -->
+          <!-- Student Information -->
+          <!-- ========================= -->
+
+          <div class="border rounded-4 p-3 p-md-4 mb-4 bg-light">
+
+            <!-- Student Name -->
+
+           <div class="d-flex align-items-center gap-3 mb-4">
+
+  <div
+    class="rounded-circle d-flex align-items-center justify-content-center shrink-0"
+    style="
+      width: 50px;
+      height: 50px;
+      background-color: #e1f0ff;
+    "
+  >
+    <i
+      class="fa-solid fa-user-graduate"
+      style="color: #0d6efd; font-size: 20px;"
+    ></i>
+  </div>
+
+  <div class="text-start grow" style="min-width: 0;">
+
+    <div
+      class="small mb-1"
+      style="color: #6c757d;"
+    >
+      Student Name
+    </div>
+
+    <div
+      class="fw-bold fs-5 text-break"
+      style="
+        color: #212529;
+        line-height: 1.5;
+        padding-bottom: 2px;
+      "
+    >
+      {{ student.name }}
+    </div>
+
+  </div>
+
+</div>
+
+
+            <!-- Phone -->
+
+           <div class="d-flex align-items-center gap-3">
+
+  <div
+    class="rounded-circle d-flex align-items-center justify-content-center shrink-0"
+    style="
+      width: 50px;
+      height: 50px;
+      background-color: #e1f0ff;
+    "
+  >
+    <i
+      class="fa-solid fa-phone"
+      style="color: #0d6efd; font-size: 19px;"
+    ></i>
+  </div>
+
+  <div class="text-start grow" style="min-width: 0;">
+
+    <div
+      class="small mb-1"
+      style="color: #6c757d;"
+    >
+      Phone
+    </div>
+
+    <div
+      class="fw-bold fs-5 text-break"
+      style="
+        color: #212529;
+        line-height: 1.5;
+        padding-bottom: 2px;
+      "
+    >
+      {{ student.phoneNo }}
+    </div>
+
+  </div>
+
+</div>
+          </div>
+          <!-- QR Code -->
+          <div
+           
+            class="border rounded-4 p-3 p-md-4 text-center bg-light"
+             style="
+    max-width: 600px;
+    background-color: #ffffff;
+    overflow: visible;
+  "
+          >
+
+            <!-- QR Title -->
+
+            <div class="mb-3">
+
+              <h5 class="fw-bold mb-1 text-dark">
+                Student QR Code
+              </h5>
+
+              <p class="small mb-0 text-secondary">
+                Scan this QR code for student information
+              </p>
+
+            </div>
+
+
+            <!-- QR -->
+             <div
+              #BarcodeOnlyRef>
+              @if (isBrowser) {
+
+             
+
+                <div class="flex justify-center">
+
+    <qrcode
+      [qrdata]="(student.barcodeId ?? student.id).toString()"
+      [width]="256"
+    ></qrcode>
+
+  </div>
+
+              
+
+            }
+
+             </div>
+            
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- Buttons -->
+        <!-- ===================================== -->
+
+        <div class="row g-3">
+
+
+          <!-- Back -->
+
+          <div class="col-6 col-md-3">
+
+            <button
+              [routerLink]="'/student'"
+              type="button"
+              class="btn btn-light border w-100 rounded-4 p-3 shadow-sm d-flex flex-column align-items-center justify-content-center gap-2"
+            >
+
+              <i class="fa-solid fa-arrow-left text-primary fs-4"></i>
+
+              <span class="fw-semibold text-dark">
+                Back
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- Full Card -->
+
+          <div class="col-6 col-md-3">
+
+            <button
+              (click)="saveFullCard(cardRef, student.name)"
+              type="button"
+              class="btn btn-light border w-100 rounded-4 p-3 shadow-sm d-flex flex-column align-items-center justify-content-center gap-2"
+            >
+
+              <i class="fa-solid fa-download text-primary fs-4"></i>
+
+              <span class="fw-semibold text-dark">
+                Full Card
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- Barcode -->
+
+          <div class="col-6 col-md-3">
+
+            <button
+              (click)="saveBarcodeOnly(BarcodeOnlyRef, student.name)"
+              type="button"
+              class="btn btn-light border w-100 rounded-4 p-3 shadow-sm d-flex flex-column align-items-center justify-content-center gap-2"
+            >
+
+              <i class="fa-solid fa-qrcode text-success fs-4"></i>
+
+              <span class="fw-semibold text-dark">
+                Barcode
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- Edit -->
+
+          <div class="col-6 col-md-3">
+
+            <button
+              [routerLink]="['/update', student.name, student.id]"
+              type="button"
+              class="btn btn-light border w-100 rounded-4 p-3 shadow-sm d-flex flex-column align-items-center justify-content-center gap-2"
+            >
+
+              <i class="fa-solid fa-pen-to-square text-warning fs-4"></i>
+
+              <span class="fw-semibold text-dark">
+                Edit
+              </span>
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>

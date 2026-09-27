@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+}
+
+.navbar {
+  transition: transform 0.25s ease;
+}
+
+.navbar-hidden {
+  transform: translateY(-100%);
+}

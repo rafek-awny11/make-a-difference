@@ -1,0 +1,255 @@
+<div
+  class="sidebar d-flex flex-column overflow-hidden"
+  style="
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(180deg, #172f58 0%, #0d2347 100%);
+  "
+>
+
+  <!-- ================= LOGO ================= -->
+
+  <div
+    class="text-center px-3 pt-3 pb-3 position-relative"
+    style="
+      z-index: 2;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    "
+  >
+
+    <img
+      src="/logo.png"
+      alt="Make A Difference"
+      class="d-block mx-auto mb-2"
+      style="
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+      "
+    />
+
+    <h2
+      class="text-white fw-bold mb-1"
+      style="font-size: 18px;"
+    >
+      Make A Difference
+    </h2>
+
+
+    <div class="d-flex align-items-center justify-content-center gap-2">
+
+      <span
+        style="
+          width: 25px;
+          height: 1px;
+          background-color: #93c5fd;
+        "
+      ></span>
+
+      <p
+        class="mb-0"
+        style="
+          color: #93c5fd;
+          font-size: 12px;
+          letter-spacing: 3px;
+        "
+      >
+        MISSION
+      </p>
+
+      <span
+        style="
+          width: 25px;
+          height: 1px;
+          background-color: #93c5fd;
+        "
+      ></span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================= MENU ================= -->
+
+  <ul
+    class="list-unstyled px-3 pt-3 mb-0 position-relative"
+    style="z-index: 2;"
+  >
+
+    <!-- HOME -->
+    <li
+      routerLink="/home"
+      routerLinkActive="bg-primary shadow-sm"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeSidebar()"
+      class="d-flex align-items-center gap-3 text-white px-3 py-3 mb-1 rounded-3"
+      style="cursor: pointer;"
+    >
+
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="width: 25px;"
+      >
+        <i class="fa-solid fa-house"></i>
+      </div>
+
+      <span class="fw-semibold">
+        Home
+      </span>
+
+    </li>
+
+
+    <!-- STUDENTS -->
+    <li
+      routerLink="/student"
+      routerLinkActive="bg-primary shadow-sm"
+      (click)="closeSidebar()"
+      class="d-flex align-items-center gap-3 text-white px-3 py-3 mb-1 rounded-3"
+      style="cursor: pointer;"
+    >
+
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="width: 25px;"
+      >
+        <i class="fa-solid fa-users"></i>
+      </div>
+
+      <span class="fw-semibold">
+        Students
+      </span>
+
+    </li>
+
+
+    <!-- ATTENDANCE -->
+    <li
+      routerLink="/attendance"
+      routerLinkActive="bg-primary shadow-sm"
+      (click)="closeSidebar()"
+      class="d-flex align-items-center gap-3 text-white px-3 py-3 mb-1 rounded-3"
+      style="cursor: pointer;"
+    >
+
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="width: 25px;"
+      >
+        <i class="fa-solid fa-user-check"></i>
+      </div>
+
+      <span class="fw-semibold">
+        Attendance
+      </span>
+
+    </li>
+
+
+    <!-- MEETINGS -->
+    <li
+      routerLink="/meeting"
+      routerLinkActive="bg-primary shadow-sm"
+      (click)="closeSidebar()"
+      class="d-flex align-items-center gap-3 text-white px-3 py-3 mb-1 rounded-3"
+      style="cursor: pointer;"
+    >
+
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="width: 25px;"
+      >
+        <i class="fa-solid fa-calendar-days"></i>
+      </div>
+
+      <span class="fw-semibold">
+        Meetings
+      </span>
+
+    </li>
+
+
+    <!-- EVENTS -->
+    <li
+      routerLink="/event"
+      routerLinkActive="bg-primary shadow-sm"
+      (click)="closeSidebar()"
+      class="d-flex align-items-center gap-3 text-white px-3 py-3 mb-1 rounded-3"
+      style="cursor: pointer;"
+    >
+
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="width: 25px;"
+      >
+        <i class="fa-solid fa-calendar"></i>
+      </div>
+
+      <span class="fw-semibold">
+        Events
+      </span>
+
+    </li>
+
+  </ul>
+
+
+
+  <!-- ================= BACKGROUND IMAGE ================= -->
+
+  <img
+    src="/sidebar-bg.png"
+    alt=""
+    class="position-absolute start-0 w-100"
+    style="
+      bottom: 57px;
+      height: 190px;
+      object-fit: cover;
+      object-position: center bottom;
+      opacity: .75;
+      z-index: 1;
+    "
+  />
+
+
+
+  <!-- ================= SIGN OUT ================= -->
+
+  <div
+    class="mt-auto position-relative px-3"
+    style="
+      z-index: 2;
+      background-color: #0d2347;
+    "
+  >
+
+    <div
+      (click)="signOut()"
+      class="d-flex align-items-center gap-3 px-3 py-3 text-white"
+      style="
+        cursor: pointer;
+        border-top: 1px solid rgba(255,255,255,.20);
+      "
+    >
+
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="
+          width: 25px;
+          color: #fb7185;
+        "
+      >
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </div>
+
+      <span class="fw-semibold">
+        Sign Out
+      </span>
+
+    </div>
+
+  </div>
+
+</div>

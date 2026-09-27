@@ -1,4 +1,4 @@
-<section class="bg-gray-600 p-8 min-h-screen">
+<!-- <section class="bg-gray-600 p-8 min-h-screen">
   <div class="bg-white shadow rounded-lg h-[500px] md:h[200px]">
     <div class="p-4 flex-1 overflow-auto">
       <h2 class="text-lg font-semibold mb-2 text-center">UpDate Student</h2>
@@ -27,4 +27,142 @@
 
     </form>
   </div>
+</section> -->
+
+
+
+<section class="min-vh-100 bg-light py-4 py-md-5">
+
+  <div class="container">
+
+    <div class="card border-0 shadow-sm rounded-4 mx-auto" style="max-width: 900px;">
+
+      <!-- Header -->
+      <div class="card-body p-4 p-md-5">
+
+        <div class="text-center mb-4">
+
+          <div class="bg-primary-subtle rounded-circle d-inline-flex align-items-center justify-content-center p-3 mb-3">
+            <i class="fa-solid fa-user-pen text-primary fs-3"></i>
+          </div>
+
+          <h2 class="fw-bold text-dark mb-2">
+            Update Student
+          </h2>
+
+          
+
+        </div>
+
+
+        <!-- Form -->
+        <form
+          [formGroup]="studentForm"
+          (ngSubmit)="UpdateStudent()"
+        >
+
+          <div class="row g-4">
+
+            <!-- Name -->
+            <div class="col-12 col-md-6">
+
+              <div class="border rounded-4 p-4 h-100 bg-white">
+
+                <label
+                  for="name"
+                  class="form-label fw-semibold text-dark"
+                >
+                  <i class="fa-solid fa-user text-primary me-2"></i>
+                  Student Name
+                </label>
+
+                <input
+                  id="name"
+                  type="text"
+                  formControlName="name"
+                  class="form-control form-control-lg rounded-3"
+                  placeholder="Enter student name"
+                />
+
+              </div>
+
+            </div>
+
+
+            <!-- Phone -->
+            <div class="col-12 col-md-6">
+
+              <div class="border rounded-4 p-4 h-100 bg-white">
+
+                <label
+                  for="phoneNo"
+                  class="form-label fw-semibold text-dark"
+                >
+                  <i class="fa-solid fa-phone text-primary me-2"></i>
+                  Phone Number
+                </label>
+
+                <input
+                  id="phoneNo"
+                  type="tel"
+                  formControlName="phoneNo"
+                  class="form-control form-control-lg rounded-3"
+                  placeholder="Enter phone number"
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Buttons -->
+          <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-5">
+
+            <button
+              type="submit"
+              class="btn btn-primary rounded-4 px-4 py-3 fw-semibold"
+            >
+
+              @if (isLoading) {
+
+                <span>
+                  <i class="fas fa-spinner fa-spin me-2"></i>
+                  Updating...
+                </span>
+
+              } @else {
+
+                <span>
+                  <i class="fa-solid fa-pen-to-square me-2"></i>
+                  Update Student
+                </span>
+
+              }
+
+            </button>
+
+
+            <button
+              [routerLink]="'/student'"
+              type="button"
+              class="btn btn-light border rounded-4 px-4 py-3 fw-semibold"
+            >
+
+              <i class="fa-solid fa-arrow-left me-2 text-primary"></i>
+              Back
+
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>

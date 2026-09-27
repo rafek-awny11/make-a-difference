@@ -1,105 +1,255 @@
-<section class="bg-gray-700 p-8 min-h-screen">
-    <div class="text-2xl p-8">
-        <h1 class="text-amber-100">meeting Details</h1>
+<section class="min-h-screen bg-slate-100 p-4 md:p-6">
 
-    </div>
+  <!-- ================= Header ================= -->
+  <div
+    class="bg-white border border-slate-200
+           shadow-sm rounded-2xl p-5 md:p-6 mb-6"
+  >
 
-    <!-- form -->
-    
-    <div class="order-3 md:order-2 col-span-6 md:col-start-1 md:col-end-7 ">
-      <div
-        class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-2xl border  border-default "
-      >
-        <table  class="w-full text-sm text-left rtl:text-right text-body">
-          <thead
-            class="text-sm text-body text-center bg-neutral-secondary-medium border-b border-default-medium rounded-2xl"
-          >
-            <tr>
-              <th scope="col" class="px-6 py-3 font-medium">Name</th>
-              <th scope="col" class="px-6 py-3 font-medium">Event Name</th>
-              <th scope="col" class="px-6 py-3 font-medium">time</th>
-              
-            </tr>
-          </thead>
+    <div
+      class="flex flex-col sm:flex-row
+             sm:items-center sm:justify-between gap-4"
+    >
 
-          <tbody *ngIf="meeting">
-          
-            <tr class="bg-neutral-primary-soft border-b text-center border-default">
-              <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                {{ meeting.name }}
-              </th>
-              <td class="px-6 py-4 font-sans">
-                {{ meeting.eventName }}
-              </td>
-              <td class="px-6 py-4  font-sans">
-                {{ meeting.meetingTime }}
-              </td>
+      <!-- Title -->
+      <div class="flex items-center gap-4">
 
-              <td class="px-6 py-4">
-              </td>
-             
-            </tr>
-            
-          </tbody>
-        </table>
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-100
+                 flex items-center justify-center shrink-0"
+        >
+          <i class="fa-solid fa-calendar-days text-blue-600 text-xl"></i>
+        </div>
+
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold text-slate-800 mb-0">
+            Meeting Details
+          </h1>
+
+          <p class="text-sm text-slate-500 mt-1 mb-0">
+            View meeting information
+          </p>
+        </div>
+
       </div>
+
+
+      <!-- Back -->
+      <button
+        type="button"
+        [routerLink]="'/meeting'"
+        class="btn btn-light border rounded-4
+               px-4 py-2
+               d-flex align-items-center
+               justify-content-center gap-2"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Meetings
+      </button>
+
     </div>
 
+  </div>
 
 
-    <div *ngIf="meeting" class="flex my-6 md:justify-end justify-center l:justify-center">
-        <button      [routerLink]="['/update-meeting',meeting.id]" class="btn btn1 md:w-32 mx-4 p-2 "> UpDate</button>
-        <button [routerLink]="'/meeting'" class="btn btn1 btn2 md:w-32 mx-4 p-2 "> Back meeting</button>
+  @if (meeting) {
+
+    <!-- ================= Details Card ================= -->
+    <div
+      class="bg-white border border-slate-200
+             shadow-sm rounded-2xl overflow-hidden"
+    >
+
+      <!-- Card Header -->
+      <div
+        class="px-5 md:px-6 py-4
+               border-b border-slate-200
+               flex items-center gap-3"
+      >
+
+        <div
+          class="w-10 h-10 rounded-xl bg-purple-100
+                 flex items-center justify-center"
+        >
+          <i class="fa-solid fa-circle-info text-blue-600"></i>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-slate-800 mb-0">
+            Meeting Information
+          </h2>
+
+         
+        </div>
+
+      </div>
+
+
+      <!-- ================= Information ================= -->
+      <div class="p-5 md:p-6">
+
+        <div
+          class="grid grid-cols-1
+                 md:grid-cols-2
+                 xl:grid-cols-3
+                 gap-4"
+        >
+
+          <!-- Meeting Name -->
+          <div
+            class="border border-slate-200
+                   rounded-2xl p-4
+                   bg-slate-50"
+          >
+
+            <div class="flex items-center gap-3">
+
+              <div
+                class="w-10 h-10 rounded-xl bg-purple-100
+                       flex items-center justify-center shrink-0"
+              >
+                <i class="fa-solid fa-users text-blue-600"></i>
+              </div>
+
+              <div class="min-w-0">
+
+                <p class="text-xl text-slate-500 mb-1">
+                  Meeting Name
+                </p>
+
+                <h3
+                  class="text-base font-semibold
+                         text-slate-800 mb-0
+                         wrap-break-word"
+                >
+                  {{ meeting.name }}
+                </h3>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Event Name -->
+          <div
+            class="border border-slate-200
+                   rounded-2xl p-4
+                   bg-slate-50"
+          >
+
+            <div class="flex items-center gap-3">
+
+              <div
+                class="w-10 h-10 rounded-xl bg-blue-100
+                       flex items-center justify-center shrink-0"
+              >
+                <i class="fa-solid fa-calendar text-blue-600"></i>
+              </div>
+
+              <div class="min-w-0">
+
+                <p class="text-xl text-slate-500 mb-1">
+                  Event Name
+                </p>
+
+                <h3
+                  class="text-base font-semibold
+                         text-slate-800 mb-0
+                         wrap-break-word"
+                >
+                  {{ meeting.eventName }}
+                </h3>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Meeting Time -->
+          <div
+            class="border border-slate-200
+                   rounded-2xl p-4
+                   bg-slate-50"
+          >
+
+            <div class="flex items-center gap-3">
+
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-100
+                       flex items-center justify-center shrink-0"
+              >
+                <i class="fa-regular fa-clock text-emerald-600"></i>
+              </div>
+
+              <div class="min-w-0">
+
+                <p class="text-xl text-slate-500 mb-1">
+                  Meeting Time
+                </p>
+
+                <h4
+                  class="text-sm font-sans
+                         text-slate-800 mb-0
+                         wrap-break-word"
+                >
+                  {{ meeting.meetingTime }}
+                </h4>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= Footer ================= -->
+      <div
+        class="px-5 md:px-6 py-4
+               border-t border-slate-200
+               bg-slate-50
+               flex flex-col-reverse sm:flex-row
+               sm:justify-end gap-3"
+      >
+
+        <!-- Back -->
+        <button
+          type="button"
+          [routerLink]="'/meeting'"
+          class="btn btn-light border
+                 rounded-4 px-4 py-2
+                 d-flex align-items-center
+                 justify-content-center gap-2"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+          Back
+        </button>
+
+
+        <!-- Update -->
+        <button
+          type="button"
+          [routerLink]="['/update-meeting', meeting.id]"
+          class="btn btn-primary
+                 rounded-4 px-4 py-2
+                 d-flex align-items-center
+                 justify-content-center gap-2"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+          Update Meeting
+        </button>
+
+      </div>
+
     </div>
+
+  }
 
 </section>
-
-
-
-<!-- <main *ngIf="update" class="bg-gray-600 m-8 max-h-screen  shadow-2xl rounded-2xl">
-    <div class="text-center">
-        <h2 class="text-2xl text-amber-100">
-            edit name
-        </h2>
-
-
-    </div>
-    <div class="order-3 md:order-2 col-span-6 md:col-start-1 md:col-end-7 ">
-      <div
-        class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-2xl border  border-default "
-      >
-        <table  class="w-full text-sm text-left rtl:text-right text-body">
-          <thead
-            class="text-sm text-body text-center bg-neutral-secondary-medium border-b border-default-medium rounded-2xl"
-          >
-            <tr>
-              <th scope="col" class="px-6 py-3 font-medium">Name</th>
-              <th scope="col" class="px-6 py-3 font-medium">Event Name</th>
-              <th scope="col" class="px-6 py-3 font-medium">time</th>
-              
-            </tr>
-          </thead>
-
-          <tbody *ngIf="meeting">
-          
-            <tr class="bg-neutral-primary-soft border-b text-center border-default">
-              <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                {{ meeting.name }}
-              </th>
-              <td class="px-6 py-4 font-sans">
-                {{ meeting.eventName }}
-              </td>
-              <td class="px-6 py-4  font-sans">
-                {{ meeting.meetingTime }}
-              </td>
-
-              
-             
-            </tr>
-            
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-</main> -->

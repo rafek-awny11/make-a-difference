@@ -32,7 +32,7 @@ export class MeetingService {
     return this.httpClient.post(environment.baseUrl + 'Meeting/Update',data)
   }
   removeMeeting(id:number):Observable<any>{
-    return this.httpClient.post(environment.baseUrl +`/Meeting/Delete/${id}`,{})
+    return this.httpClient.post(environment.baseUrl +`Meeting/Delete/${id}`,{})
   }
   
 }

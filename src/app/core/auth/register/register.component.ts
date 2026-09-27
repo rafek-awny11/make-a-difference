@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
 registerForm!: FormGroup 
 isLoading:boolean =false
 msgErorr:string = "";
+showPassword: boolean = false;
 
 
 ngOnInit(): void {
@@ -81,5 +82,7 @@ this.isLoading= false
     }
     
   }
-
+togglePassword(): void {
+  this.showPassword = !this.showPassword;
+}
 }

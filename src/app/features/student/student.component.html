@@ -1,162 +1,359 @@
-<section class="bg-gray-300 p-8 min-h-screen">
-    <div class="grid grid-cols-6 gap-4 items-center">
-        <div class="col-span-6 md:col-span-2 md:col-end-7 order-2 md:order-2">
-      <form class="max-w-sm mx-auto">
-        <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only"
-          >Search Student</label
-        >
-        <div class="relative">
-          <input
-            [(ngModel)]="text"
-            type="search"
-            name="search"
-            class="block w-full md:w-2xs ps-4 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-            placeholder="Search Meeting...."
-          />
-        </div>
-      </form>
-    </div>
-    <div class="order-1 col-span-6 md:col-span-1 text-center rounded-2xl colo1">
-      <h2 class="text-lg font-bold md:text-2xl">All Student</h2>
-    </div>
-    <!--search-->
-  
+<section class="bg-light min-vh-100 py-4 py-md-5">
+  <div class="container-fluid px-3 px-md-4 px-lg-5">
+    <!-- ================= HEADER ================= -->
 
-    <div class="order-3 md:order-1 col-span-6 md:col-span-5 flex justify-end">
+    <div
+      class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4"
+    >
+      <div>
+        <h2 class="fw-bold mb-1">
+          <i class="fa-solid fa-users text-primary me-2"></i>
+          All Students
+        </h2>
+      </div>
+
+      <!-- Create Student -->
+
       <button
-        data-modal-target="default-modal"
-        data-modal-toggle="default-modal"
-        class="btn btn1 md:w-32"
+        type="button"
+        (click)="openModal()"
+        class="btn btn-primary px-4 py-2 rounded-3 shadow-sm"
       >
+        <i class="fa-solid fa-plus me-2"></i>
         Create Student
       </button>
     </div>
 
-    <!--table-->
-    <div class="order-2 md:order-2 col-span-6 md:col-start-1 md:col-end-7">
-      <div
-        class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default"
-      >
-        <table  class="w-full text-sm text-left rtl:text-right text-body">
-          <thead
-            class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium"
-          >
+    <!-- ================= SEARCH + SHOW ================= -->
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+      <div class="card-body p-3 p-md-4">
+        <div class="row align-items-end g-3">
+          <!-- Search -->
+
+          <div class="col-12 col-md-6">
+            <label for="studentSearch" class="form-label fw-semibold mb-2"> Search Students </label>
+
+            <div class="input-group">
+              <span class="input-group-text bg-white">
+                <i class="fa-solid fa-magnifying-glass text-secondary"></i>
+              </span>
+
+              <input
+                id="studentSearch"
+                [(ngModel)]="text"
+                type="search"
+                name="search"
+                class="form-control"
+                placeholder="Search by name or phone..."
+              />
+            </div>
+          </div>
+
+          <!-- Show Entries -->
+
+          <div class="col-12 col-md-6">
+            <div class="d-flex align-items-center justify-content-md-end gap-2">
+              <label for="itemsPerPage" class="form-label fw-semibold mb-0"> Show </label>
+
+              <select
+                id="itemsPerPage"
+                class="form-select"
+                style="width: 90px"
+                [(ngModel)]="itemsPerPage"
+                (ngModelChange)="currentPage = 1"
+              >
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="15">15</option>
+                <option [ngValue]="20">20</option>
+              </select>
+
+              <span class="text-secondary"> students </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STUDENTS TABLE ================= -->
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <!-- Header -->
+
+          <thead class="table-light">
             <tr>
-              <th scope="col" class="px-6 py-3 font-medium">Name</th>
-              <th scope="col" class="px-6 py-3 font-medium">Phone</th>
-                 <th scope="col"  class="px-6 py-3 font-medium">Action</th>
-              <th scope="col" class="px-6 py-3 font-medium">Delete</th>
+              <th class="px-3 px-md-4 py-3">#</th>
+
+              <th class="py-3">Student Name</th>
+
+              <th class="py-3">Phone</th>
+
+              <th class="text-center py-3">Actions</th>
             </tr>
           </thead>
 
-          <tbody>
-            @for ( student of studentData | search:text ; track student.id) {
-            <tr class="bg-neutral-primary-soft border-b border-default">
-              <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                {{ student.name }}
-              </th>
-              <td class="px-6 py-4 font-sans">
-                {{ student.phoneNo }}
-              </td>
-              
+          <!-- Body -->
 
-              <td class="px-6 py-4">
-                <div [routerLink]="['/studentDetails' ,student.id ]" class="font-medium cursor-pointer text-fg-brand hover:underline">Edit</div>
-              </td>
-             <td (click)="removeStudent(student.id)" class="px-6 py-4">
-                <i class="fa-solid fa-trash hover:text-red-700 cursor-pointer"></i>
-              </td>
-            </tr>
+          <tbody>
+            @for (student of paginatedStudents; track student.id; let i = $index) {
+              <tr>
+                <!-- Number -->
+
+                <td class="px-3 px-md-4 py-3 text-secondary">
+                  {{ (currentPage - 1) * itemsPerPage + i + 1 }}
+                </td>
+
+                <!-- Student -->
+
+                <td class="py-3">
+                  <div class="d-flex align-items-center gap-3">
+                    <!-- Icon -->
+
+                    <div
+                      class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center shrink-0"
+                      style="width: 42px; height: 42px"
+                    >
+                      <i class="fa-solid fa-user text-primary"></i>
+                    </div>
+
+                    <!-- Name -->
+
+                    <div>
+                      <div class="fw-semibold text-dark">
+                        {{ student.name }}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Phone -->
+
+                <td class="py-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-phone text-secondary"></i>
+
+                    <span class="text-secondary">
+                      {{ student.phoneNo }}
+                    </span>
+                  </div>
+                </td>
+
+                <!-- Actions -->
+
+                <td class="text-center py-3">
+                  <div class="d-flex justify-content-center gap-2">
+                    <!-- Details / Edit -->
+
+                    <button
+                      type="button"
+                      [routerLink]="['/studentDetails', student.id]"
+                      class="btn btn-light border rounded-3"
+                      title="Student Details"
+                    >
+                      <i class="fa-solid fa-pen-to-square text-primary"></i>
+                    </button>
+
+                    <!-- Delete -->
+
+                    <button
+                      type="button"
+                      (click)="removeStudent(student.id)"
+                      class="btn btn-light border rounded-3"
+                      title="Delete Student"
+                    >
+                      <i class="fa-solid fa-trash text-danger"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
             }
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
 
-  <!-- Main modal -->
-  <form [formGroup]="studentForm" (ngSubmit)="submitForm()" >
-    <div
-      #modal
-      id="default-modal"
-      tabindex="-1"
-      aria-hidden="true"
-      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
-    >
-      <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
+      <!-- ================= PAGINATION ================= -->
+
+      <div class="card-footer bg-white border-0 px-3 px-md-4 py-4">
         <div
-          class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6"
+          class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3"
         >
-          <!-- Modal header -->
-          <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
-            <h3 class="text-2xl font-semibold text-heading">Creat Student</h3>
+          <!-- Showing -->
+
+          <p class="text-secondary small mb-0">
+            Showing
+
+            <span class="fw-semibold text-dark">
+              {{ currentStart }}
+            </span>
+
+            to
+
+            <span class="fw-semibold text-dark">
+              {{ currentEnd }}
+            </span>
+
+            of
+
+            <span class="fw-semibold text-dark">
+              {{ filteredStudents.length }}
+            </span>
+
+            students
+          </p>
+
+          <!-- Pagination Buttons -->
+
+          <div class="d-flex align-items-center gap-2">
+            <!-- Previous -->
+
             <button
               type="button"
-              class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
-               (click)="closeModal()"
+              (click)="previousPage()"
+              [disabled]="currentPage === 1"
+              class="btn btn-light border rounded-3"
             >
-              <svg
-                class="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18 17.94 6M18 18 6.06 6"
-                />
-              </svg>
-              <span class="sr-only">Close modal</span>
+              <i class="fa-solid fa-chevron-left"></i>
             </button>
-          </div>
-          <!-- Modal body -->
-          <div class="mb-4">
-            <label for="text" class="block mb-2.5 text-sm font-medium text-heading"
-              >Name</label
-            >
-            <input
-              formControlName="name"
-              type="text"
-              id="text"
-              class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-              placeholder="name"
-              required
-            />
-          </div>
 
-          <div class="relative mb-4 max-w-sm">
-            <input
-              formControlName="phoneNo"
-              type="tel"
-              class="block w-full ps-5 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 shadow-xs placeholder:text-body"
-              placeholder="Phone Nember"
-            />
-          </div>
+            <!-- Pages -->
 
+            @for (page of pages; track page) {
+              <button
+                type="button"
+                (click)="changePage(page)"
+                class="btn rounded-3"
+                [class.btn-primary]="currentPage === page"
+                [class.btn-light]="currentPage !== page"
+                [class.border]="currentPage !== page"
+              >
+                {{ page }}
+              </button>
+            }
 
-          <!-- Modal footer -->
-          <div class="flex items-center border-t border-default space-x-4 pt-4 md:pt-5">
+            <!-- Next -->
+
             <button
-              [disabled]="isLoading"
-              type="submit"
-              class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+              type="button"
+              (click)="nextPage()"
+              [disabled]="currentPage === totalPages || totalPages === 0"
+              class="btn btn-light border rounded-3"
             >
-              Creat @if (isLoading) {
-              <span><i class="fas fa-spinner animate-spin"></i></span>
-              }
+              <i class="fa-solid fa-chevron-right"></i>
             </button>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 
-  
+  <!-- ================================================= -->
+  <!-- CREATE STUDENT MODAL -->
+  <!-- ================================================= -->
+
+  @if (isModalOpen) {
+    <form [formGroup]="studentForm" (ngSubmit)="submitForm()">
+      <!-- Overlay -->
+
+      <div
+        #modal
+        tabindex="-1"
+        class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center p-3"
+        style="z-index: 1050"
+      >
+        <!-- Modal Card -->
+
+        <div class="card border-0 shadow-lg rounded-4 w-100" style="max-width: 600px">
+          <!-- ================= MODAL HEADER ================= -->
+
+          <div class="card-header bg-white border-0 p-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="fw-bold mb-1">Create New Student</h4>
+
+                <p class="text-secondary mb-0">Add a new student to your system</p>
+              </div>
+
+              <!-- Close -->
+
+              <button
+                type="button"
+                (click)="closeModal()"
+                class="btn btn-light border rounded-circle"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- ================= MODAL BODY ================= -->
+
+          <div class="card-body p-4">
+            <!-- Student Name -->
+
+            <div class="mb-3">
+              <label for="studentName" class="form-label fw-semibold"> Student Name </label>
+
+              <input
+                id="studentName"
+                formControlName="name"
+                type="text"
+                class="form-control"
+                placeholder="Enter student name"
+                [class.is-invalid]="
+                  studentForm.get('name')?.invalid && studentForm.get('name')?.touched
+                "
+              />
+
+              @if (studentForm.get('name')?.invalid && studentForm.get('name')?.touched) {
+                <div class="invalid-feedback">Please enter a valid student name (min 3 chars).</div>
+              }
+            </div>
+
+            <!-- Phone -->
+
+            <div class="mb-3">
+              <label for="studentPhone" class="form-label fw-semibold"> Phone Number </label>
+
+              <input
+                id="studentPhone"
+                formControlName="phoneNo"
+                type="tel"
+                class="form-control"
+                placeholder="Enter phone number"
+              />
+            </div>
+          </div>
+
+          <!-- ================= MODAL FOOTER ================= -->
+
+          <div class="card-footer bg-white border-0 p-4 pt-0">
+            <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
+              <!-- Create -->
+
+              <button [disabled]="isLoading" type="submit" class="btn btn-primary px-4">
+                <i class="fa-solid fa-plus me-2"></i>
+
+                Create
+
+                @if (isLoading) {
+                  <span class="ms-2">
+                    <i class="fas fa-spinner fa-spin"></i>
+                  </span>
+                }
+              </button>
+
+              <!-- Cancel -->
+
+              <button type="button" (click)="closeModal()" class="btn btn-light border px-4">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  }
 </section>

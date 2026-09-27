@@ -1,14 +1,231 @@
-<section class="bg-white  h-screen flex flex-col items-center justify-center ">
-    <div >
-                <h2 class="text-3xl p-2 font-light text-center md:text-6xl md:font-light animate-drop">Welcome To</h2>
+<section class="home-page">
+
+  <div class="container-fluid py-4">
+
+    <!-- =========================================
+         HERO BANNER
+    ========================================== -->
+    <div class="hero-banner mb-4">
+
+      <img
+        src="/home-banner.png"
+        alt="Make A Difference Mission"
+        class="hero-image"
+      />
+
+      <!-- Dark Overlay -->
+      <div class="hero-overlay"></div>
 
 
-        <h3 class="text-3xl p-2 font-light  md:text-6xl md:font-light animate-drop">Make A Difference Mission</h3>
-        
-        
+      <!-- Hero Content -->
+      <div class="hero-content">
+
+        <h1 class="hero-title">
+          Make A Difference
+        </h1>
+
+        <div class="mission-wrapper">
+
+          <span class="mission-line"></span>
+
+          <span class="mission-text">
+            MISSION
+          </span>
+
+          <span class="mission-line"></span>
+
+        </div>
+
+      </div>
+
     </div>
-    <div>
-        <img src="/logo.png" class="w-2xs py-2 animate-drop-bounce delay-500 " alt="Make A Difference" />
+
+
+    <!-- =========================================
+         QUICK ACTIONS
+    ========================================== -->
+
+    <div class="quick-actions">
+
+      <!-- Header -->
+      <div class="mb-3">
+
+        <h4 class="fw-bold mb-1">
+          Quick Actions
+        </h4>
+
+      </div>
+
+
+      <div class="row g-3">
+
+
+        <!-- ================= ADD STUDENT ================= -->
+
+        <div class="col-12 col-md-6 col-xl-3">
+
+          <div
+            class="quick-action-item student-action"
+            routerLink="/student"
+          >
+
+            <div class="action-icon student-icon">
+
+              <i class="fa-solid fa-user-plus"></i>
+
+            </div>
+
+
+            <div class="action-content">
+
+              <h6 class="fw-semibold mb-1">
+                Add Student
+              </h6>
+
+              <p class="text-secondary small mb-0">
+                Register a new student
+              </p>
+
+            </div>
+
+
+            <div class="action-arrow">
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ================= CREATE EVENT ================= -->
+
+        <div class="col-12 col-md-6 col-xl-3">
+
+          <div
+            class="quick-action-item event-action"
+            routerLink="/event"
+          >
+
+            <div class="action-icon event-icon">
+
+              <i class="fa-solid fa-calendar-plus"></i>
+
+            </div>
+
+
+            <div class="action-content">
+
+              <h6 class="fw-semibold mb-1">
+                Create Event
+              </h6>
+
+              <p class="text-secondary small mb-0">
+                Add a new event
+              </p>
+
+            </div>
+
+
+            <div class="action-arrow">
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ================= CREATE MEETING ================= -->
+
+        <div class="col-12 col-md-6 col-xl-3">
+
+          <div
+            class="quick-action-item meeting-action"
+            routerLink="/meeting"
+          >
+
+            <div class="action-icon meeting-icon">
+
+              <i class="fa-solid fa-users"></i>
+
+            </div>
+
+
+            <div class="action-content">
+
+              <h6 class="fw-semibold mb-1">
+                Create Meeting
+              </h6>
+
+              <p class="text-secondary small mb-0">
+                Schedule a meeting
+              </p>
+
+            </div>
+
+
+            <div class="action-arrow">
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ================= ATTENDANCE ================= -->
+
+        <div class="col-12 col-md-6 col-xl-3">
+
+          <div
+            class="quick-action-item attendance-action"
+            routerLink="/attendance"
+          >
+
+            <div class="action-icon attendance-icon">
+
+              <i class="fa-solid fa-qrcode"></i>
+
+            </div>
+
+
+            <div class="action-content">
+
+              <h6 class="fw-semibold mb-1">
+                Attendance Scanner
+              </h6>
+
+              <p class="text-secondary small mb-0">
+                Scan student QR code
+              </p>
+
+            </div>
+
+
+            <div class="action-arrow">
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
- 
+
+  </div>
+
 </section>

@@ -4,7 +4,8 @@
 @source "../node_modules/flowbite";
 
 body{
-    margin: auto;
+    margin: 0;
+    padding: 0;
     font-family: "Playfair Display", serif;
     
    
@@ -16,9 +17,7 @@ body{
 }
 
 
-@utility container{
-    margin-inline:auto;
-}
+
 
 .colo1 {
   background-color: var(--main-color);

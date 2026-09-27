@@ -17,7 +17,7 @@ export class StudentDetailsComponent implements OnInit {
   private readonly allstudentService = inject(AllstudentService)
     private readonly route = inject(ActivatedRoute);
 
-
+qrCodeDownloadLink: string = '';
 
    student: AllStudent = {
      id: 0,
@@ -27,6 +27,7 @@ export class StudentDetailsComponent implements OnInit {
   };
 
    
+
  
   isBrowser= true;
 
@@ -66,30 +67,21 @@ export class StudentDetailsComponent implements OnInit {
     });
   }
    
-  //  getAllStudentData(): void{
-  //   this.allstudentService.getAllStudent().subscribe({
-  //     next:(res)=>{
-  //       console.log(res);
-  //       this.studentData=res;
 
-        
-        
-  //     },
-  //     error:(err)=>{
-  //       console.log(err);
-        
-  //     }
 
-  //   })
-  // }
 
-  // 
-  saveFullCard(element: HTMLElement, studentName: string) {
+
+
+saveFullCard(element: HTMLElement, studentName: string) {
   html2canvas(element, {
     scale: 2,
+    backgroundColor: '#ffffff',
     useCORS: true
   }).then(canvas => {
-    this.download(canvas, `${studentName}-ID-Card.png`);
+    this.download(
+      canvas,
+      `${studentName}-ID-Card.png`
+    );
   });
 }
 
@@ -103,47 +95,26 @@ saveBarcodeOnly(element: HTMLElement, studentName: string) {
   });
 }
 
+
+onChangeURL(url: string) {
+  this.qrCodeDownloadLink = url;
+}
+
+
 private download(canvas: HTMLCanvasElement, fileName: string) {
   const link = document.createElement('a');
+
   link.download = fileName;
   link.href = canvas.toDataURL('image/png');
+
   link.click();
 }
 
 
-//   saveCardAsImage(cardElement: HTMLElement, studentName: string) {
-//   html2canvas(cardElement, {
-//     scale: 2,
-//     useCORS: true
-//   }).then(canvas => {
-//     const link = document.createElement('a');
-//     link.download = `${studentName}-ID-Card.png`;
-//     link.href = canvas.toDataURL('image/png');
-//     link.click();
-//   });
-// }
-// saveBarcodeOnly(element: HTMLElement, studentName: string) {
-//   html2canvas(element, {
-//     scale: 3,
-//     backgroundColor: '#ffffff',
-//     useCORS: true
-//   }).then(canvas => {
-//     this.download(canvas, `${studentName}-Barcode.png`);
-//   });
-// }
+
 
 }
 
 
-//   saveCardAsImage(element: HTMLElement, studentName: string) {
-//   html2canvas(element, {
-//     scale: 2,        // جودة أعلى
-//     backgroundColor: '#ffffff',  useCORS: true
-//   }).then(canvas => {
-//     const link = document.createElement('a');
-//     link.download = `${studentName}-ID-Card.png`;
-//     link.href = canvas.toDataURL('image/png');
-//     link.click();
-//   });
-// }
+
 

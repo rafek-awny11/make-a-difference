@@ -1,0 +1,103 @@
+.layout {
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar-wrapper {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 260px;
+  height: 100vh;
+
+  z-index: 1200;
+
+  transform: translateX(-100%);
+
+  transition: transform 0.3s ease;
+}
+
+
+/* لما Sidebar مفتوحة */
+
+.sidebar-wrapper.sidebar-open {
+  transform: translateX(0);
+}
+
+
+/* ================= CONTENT ================= */
+
+.content {
+  width: 100%;
+  min-height: 100vh;
+
+  margin-left: 0;
+
+  transition:
+    margin-left 0.3s ease,
+    width 0.3s ease;
+}
+
+
+/* ================= MAIN ================= */
+
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* ================= DESKTOP ================= */
+
+@media (min-width: 992px) {
+
+  .content.sidebar-active {
+    margin-left: 260px;
+
+    width: calc(100% - 260px);
+  }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 991.98px) {
+
+  .content,
+  .content.sidebar-active {
+    margin-left: 0;
+
+    width: 100%;
+  }
+
+}
+
+
+/* ================= BACKDROP ================= */
+
+.sidebar-backdrop {
+  display: none;
+}
+
+
+@media (max-width: 991.98px) {
+
+  .sidebar-backdrop {
+    display: block;
+
+    position: fixed;
+
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    z-index: 1100;
+  }
+
+}

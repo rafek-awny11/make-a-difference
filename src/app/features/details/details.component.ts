@@ -41,9 +41,11 @@ export class DetailsComponent implements OnInit  {
 
   refreshAvailable: boolean = false;
 
-  availableSearch: string = '';
-  availableEntries: number = 5;
+  
   currentEventId: number = 1;
+
+  currentEntries: number = 5;
+currentSearch: string = '';
 
   studentPhone: string = '';
 meetingId: number | null = null;
@@ -134,78 +136,7 @@ onStudentAdded(student: currentStudents): void {
 }
 
 
-// exportAttendanceExcel(): void {
 
-//   if (!this.id) {
-//     this.toastrService.error('Event Id not found');
-//     return;
-//   }
-
-//   this.attendanceService.exportFile(
-//     this.id,
-//     this.meetingId || undefined,
-//     this.studentPhone
-//   ).subscribe({
-
-//     next: async (res: Blob) => {
-//        if (res.type.includes('application/json')) {
-
-//     const text = await res.text();
-
-//     const errorResponse = JSON.parse(text);
-
-//     this.toastrService.error(errorResponse.message);
-
-//     return;
-//   }
-      
-
-//       const blob = new Blob([res], {
-//         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-//       });
-
-      
-//       const url = window.URL.createObjectURL(blob);
-
-//       const a = document.createElement('a');
-
-
-//       a.href = url;
-//       const meeting = this.allMeeting.find(x => x.id == this.meetingId);
-
-// const fileName = meeting?.name || 'حضور الاجتماعات';
-        
-
-
-//       a.download = `${fileName}.xlsx`;
-
-
-//       a.click();
-
-//       window.URL.revokeObjectURL(url);
-      
-
-//       this.toastrService.success('Excel downloaded successfully');
-//     },
-
-//     error: (err) => {
-//       console.log(err);
-//       this.toastrService.error('Download failed');
-//     }
-
-//   });
-// }
-
-// closeModal(): void {
-//   this.showModal = false;
-// }
-
-// confirmExport(): void {
-
-//   this.exportAttendanceExcel();
-
-//   this.showModal = false;
-// }
 
 
 
@@ -220,47 +151,55 @@ getAllMeetings(): void {
     }
   });
 }
-
-
-
-goToPage(item: any) {
-  console.log('Go to page', item);
-   const filteredData = this.allattendance.filter(x =>
-    x.meeting?.id === item.meeting?.id). 
-  map(x => ({
-
-      'الأسم': x.eventName,
-
-      'الاجتماع': x.meeting?.name,
-
-      'وقت الاجتماع': x.meeting?.startTime,
-
-      'وقت الحضور': x.attendanceTime,
-
-      'التأخير (د)': this.calculateDelay(
-        x.meeting?.startTime,
-        x.attendanceTime
-      )
-
-    }));
-
-
-  // لو عندك Router
+goToPage(): void {
   this.router.navigate(
-  ['/show-details', this.eventData?.name, this.id],
-  {
-    state: {
-      data: filteredData,
-      eventId: this.id
+    ['/show-details', this.eventData?.name, this.id],
+    {
+      state: {
+        eventId: this.id
+      }
     }
-  }
-);
-   
+  );
 }
+
+
+// goToPage(item: any) {
+//   console.log('Go to page', item);
+//    const filteredData = this.allattendance.filter(x =>
+//     x.meeting?.id === item.meeting?.id). 
+//   map(x => ({
+
+//       'الأسم': x.eventName,
+
+//       'الاجتماع': x.meeting?.name,
+
+//       'وقت الاجتماع': x.meeting?.startTime,
+
+//       'وقت الحضور': x.attendanceTime,
+
+//       'التأخير (د)': this.calculateDelay(
+//         x.meeting?.startTime,
+//         x.attendanceTime
+//       )
+
+//     }));
+
+
+//   // لو عندك Router
+//   this.router.navigate(
+//   ['/show-details', this.eventData?.name, this.id],
+//   {
+//     state: {
+//       data: filteredData,
+//       eventId: this.id
+//     }
+//   }
+// );
+   
+// }
   calculateDelay(startTime: any, attendanceTime: string): any {
     throw new Error('Method not implemented.');
   }
-
 
 
 }

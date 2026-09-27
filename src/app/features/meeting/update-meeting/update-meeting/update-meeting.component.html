@@ -1,33 +1,214 @@
+<section class="min-h-screen bg-slate-100 p-4 md:p-6">
 
-<section class="bg-gray-600 p-8 min-h-screen">
-  <div class="bg-white shadow rounded-lg h-[500px] md:h[200px]">
-    <div class="p-4 flex-1 overflow-auto">
-      <h2 class="text-lg font-semibold mb-2 text-center">UpDate Student</h2>
+  <!-- Main Card -->
+  <div
+    class="bg-white border border-slate-200
+           shadow-sm rounded-2xl overflow-hidden"
+  >
+
+    <!-- ================= Header ================= -->
+    <div
+      class="p-5 md:p-6 border-b border-slate-200
+             flex items-center gap-4"
+    >
+
+      <!-- Icon -->
+      <div
+        class="w-12 h-12 rounded-xl bg-purple-100
+               flex items-center justify-center shrink-0"
+      >
+        <i class="fa-solid fa-pen-to-square text-blue-600 text-xl"></i>
+      </div>
+
+      <!-- Title -->
+      <div>
+
+        <h1 class="text-xl md:text-2xl font-bold text-slate-800 mb-0">
+          Update Meeting
+        </h1>
+
+        <p class="text-sm text-slate-500 mt-1 mb-0">
+          Edit meeting information
+        </p>
+
+      </div>
 
     </div>
-    <form [formGroup]="updateForm" (ngSubmit)="UpdateStudent()" >
-        <div class="grid gap-2 md:grid-cols-1 lg:grid-cols-2 mb-2">
-        <div>
-            <label for="first_name" class="block mb-2.5 mx-4  text-sm font-medium text-heading">Event Name</label>
-            <input  formControlName="eventName" class="bg-neutral-secondary-medium border border-default-medium text-heading text-xl rounded-base focus:ring-brand focus:border-brand block w-sm px-4 py-2.5 mx-4 shadow-xs placeholder:text-body disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed"  /> 
-        </div>
-        <div>
-            <label for="last_name" class="block mb-2.5 mx-4 text-sm font-medium text-heading">Name</label>
-            <input  formControlName="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-xl rounded-base focus:ring-brand focus:border-brand block w-sm  px-4 py-2.5  mx-4 shadow-xs placeholder:text-body"  />
-        </div>
-         <div>
-            <label for="last_name" class="block mb-2.5 mx-4 text-sm font-medium text-heading">Meeting Time</label>
-            <input  formControlName="meetingTime" class="bg-neutral-secondary-medium border border-default-medium text-heading text-xl rounded-base focus:ring-brand focus:border-brand block w-sm  px-4 py-2.5  mx-4 shadow-xs placeholder:text-body"  />
-        </div>
-
-    </div>
-    <div class="flex my-6 md:justify-end justify-center l:justify-center">
-        <button  type="submit"   class="btn btn1 md:w-32 mx-4 p-2 "> UpDate</button>
-        <button [routerLink]="'/meeting'" class="btn btn1 md:w-32 mx-4 p-2 "> Back Home</button>
 
 
-    </div>
+    <!-- ================= Form ================= -->
+    <form
+      [formGroup]="updateForm"
+      (ngSubmit)="UpdateStudent()"
+    >
+
+      <div class="p-5 md:p-6">
+
+        <div
+          class="grid grid-cols-1
+                 md:grid-cols-2
+                 gap-5"
+        >
+
+          <!-- Event Name -->
+          <div>
+
+            <label
+              class="block mb-2
+                     text-sm font-semibold text-slate-700"
+            >
+              Event Name
+            </label>
+
+            <div class="relative">
+
+              <i
+                class="fa-solid fa-calendar-days
+                       absolute left-4 top-1/2
+                       -translate-y-1/2
+                       text-slate-400"
+              ></i>
+
+              <input
+                formControlName="eventName"
+                type="text"
+                class="w-full h-12
+                       border border-slate-300
+                       rounded-xl
+                       bg-slate-100
+                       pl-11 pr-4
+                       text-sm text-slate-600
+                       focus:outline-none
+                       disabled:bg-slate-100
+                       disabled:text-slate-500
+                       disabled:cursor-not-allowed"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- Meeting Name -->
+          <div>
+
+            <label
+              class="block mb-2
+                     text-sm font-semibold text-slate-700"
+            >
+              Meeting Name
+            </label>
+
+            <div class="relative">
+
+              <i
+                class="fa-solid fa-users
+                       absolute left-4 top-1/2
+                       -translate-y-1/2
+                       text-slate-400"
+              ></i>
+
+              <input
+                formControlName="name"
+                type="text"
+                placeholder="Enter meeting name"
+                class="w-full h-12
+                       border border-slate-300
+                       rounded-xl
+                       bg-white
+                       pl-11 pr-4
+                       text-sm text-slate-700
+                       focus:outline-none
+                       focus:ring-2 focus:ring-blue-600
+                       focus:border-blue-600"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- Meeting Time -->
+          <div class="md:col-span-2">
+
+            <label
+              class="block mb-2
+                     text-sm font-semibold text-slate-700"
+            >
+              Meeting Time
+            </label>
+
+            <div class="relative">
+
+              <i
+                class="fa-regular fa-clock
+                       absolute left-4 top-1/2
+                       -translate-y-1/2
+                       text-slate-400"
+              ></i>
+
+              <input
+                formControlName="meetingTime"
+                type="datetime-local"
+                class="w-full h-12
+                       border border-slate-300
+                       rounded-xl
+                       bg-white
+                       pl-11 pr-4
+                       text-sm text-slate-700
+                       focus:outline-none
+                       focus:ring-2 focus:ring-blue-600
+                       focus:border-blue-600"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= Footer ================= -->
+      <div
+        class="px-5 md:px-6 py-4
+               bg-slate-50
+               border-t border-slate-200
+               flex flex-col-reverse sm:flex-row
+               sm:justify-end gap-3"
+      >
+
+        <!-- Back -->
+        <button
+          type="button"
+          [routerLink]="'/meeting'"
+          class="btn btn-light border
+                 rounded-4 px-4 py-2
+                 d-flex align-items-center
+                 justify-content-center gap-2"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to Meetings
+        </button>
+
+
+        <!-- Update -->
+        <button
+          type="submit"
+          class="btn btn-primary
+                 rounded-4 px-4 py-2
+                 d-flex align-items-center
+                 justify-content-center gap-2"
+        >
+          <i class="fa-solid fa-floppy-disk"></i>
+          Update Meeting
+        </button>
+
+      </div>
 
     </form>
+
   </div>
+
 </section>

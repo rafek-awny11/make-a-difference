@@ -25,6 +25,7 @@ export class LoginComponent {
 
 isLoading:boolean =false
 msgErorr:string = "";
+showPassword: boolean = false;
 
 ngOnInit(): void{
   this.initForm();
@@ -54,6 +55,8 @@ initForm(): void{
 
   if (res.status === true) {
     this.cookieService.set('token', res.record.token);
+
+     this.authService.saveUser(res.record.userInfo);
 
     this.toastrService.success('Login successful');
   
@@ -85,6 +88,9 @@ initForm(): void{
     
   }
   
+togglePassword(): void {
+  this.showPassword = !this.showPassword;
+}
   
 
 }
