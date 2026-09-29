@@ -228,29 +228,57 @@
 
               @let passwordControl = registerForm.get('password');
 
-              @if (passwordControl?.errors && passwordControl?.touched) {
+@if (passwordControl?.errors && passwordControl?.touched) {
 
-                <div class="text-danger small mt-2">
+  <div class="text-danger small mt-2">
 
-                  @if (passwordControl?.getError('required')) {
+    @if (passwordControl?.getError('required')) {
 
-                    <div>
-                      <i class="fa-solid fa-circle-exclamation me-1"></i>
-                      Password is required.
-                    </div>
+      <div>
+        <i class="fa-solid fa-circle-exclamation me-1"></i>
+        Password is required.
+      </div>
 
-                  } @else if (passwordControl?.getError('pattern')) {
+    }
 
-                    <div>
-                      <i class="fa-solid fa-circle-exclamation me-1"></i>
-                      Please enter a valid password.
-                    </div>
+    @if (passwordControl?.getError('minlength')) {
 
-                  }
+      <div>
+        <i class="fa-solid fa-circle-exclamation me-1"></i>
+        Password must be at least 6 characters.
+      </div>
 
-                </div>
+    }
 
-              }
+    @if (passwordControl?.getError('pattern')) {
+
+      <div>
+        <i class="fa-solid fa-circle-exclamation me-1"></i>
+        Password must contain an uppercase letter, number and special character.
+      </div>
+
+    }
+
+  </div>
+
+}
+
+@if (passwordApiErrors.length > 0) {
+
+  <div class="text-danger small mt-2">
+
+    @for (error of passwordApiErrors; track error) {
+
+      <div class="mb-1">
+        <i class="fa-solid fa-circle-exclamation me-1"></i>
+        {{ error }}
+      </div>
+
+    }
+
+  </div>
+
+}
 
             </div>
 
